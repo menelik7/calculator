@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Calculator</title>
+
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">  
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+
+    <!-- Bootstrap JS Files -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+
+		#title {
+			margin: 20px auto;
+			text-align: center;
+		}
+		.input {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 95px;
+			border: 1px solid #777777;
+			border-radius: 5px;
+			background: #fff;
+			color: #777777;
+			cursor: pointer;
+			font-size: 35px;
+		}
+
+		#input-display {
+			padding: 0 80px;
+			margin-bottom: 10px;
+			height: 95px;
+			font-size:35px;
+			background: #333;
+			color: #fff;
+			border-radius: 5px;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+
+		#numbers {
+			color: #333;
+			font-weight: bold;
+		}
+
+		#dot {
+			color: #777777;
+			font-size: 35px;
+			font-weight: bold;
+		}
+
+	</style>
+</head>
+<body>
+	<h1 id=title>Falc's calculator</h1>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-8 offset-lg-2">
+				<div class="row">
+					<div class="col-12" id="input-display"></div>
+					<div class="col-3 input" id="clear-entry" style="background: #f6f6f6; font-size: 30px;">CE</div>
+					<div class="col-3 input" id="memorize" style="background: #f6f6f6; font-size: 30px;">M+</div>
+					<div class="col-3 input" id="display-memory" style="background: #f6f6f6; font-size: 30px;">M</div>				
+					<div class="col-3 input" id="operator" style="background: #f6f6f6">/</div>
+					<div class="col-3 input" id="numbers">7</div>
+					<div class="col-3 input" id="numbers">8</div>
+					<div class="col-3 input" id="numbers">9</div>
+					<div class="col-3 input" id="operator" style="background: #f6f6f6">x</div>
+					<div class="col-3 input" id="numbers">4</div>
+					<div class="col-3 input" id="numbers">5</div>
+					<div class="col-3 input" id="numbers">6</div>
+					<div class="col-3 input" id="operator" style="background: #f6f6f6">-</div>
+					<div class="col-3 input" id="numbers">1</div>
+					<div class="col-3 input" id="numbers">2</div>
+					<div class="col-3 input" id="numbers">3</div>
+					<div class="col-3 input" id="operator" style="background: #f6f6f6">+</div>
+					<div class="col-3 input" id="dot" style="background: #f6f6f6">.</div>
+					<div class="col-3 input" id="numbers">0</div>
+					<div class="col-3 input" id="backspace" style="background: #f6f6f6"><i class="material-icons">&#xe14a;</i></div>
+					<div class="col-3 input" id="equals" style="background: #f6f6f6">=</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6">
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		// Declare variables
+		let numbersKey = document.querySelectorAll('#numbers'); // keys
+		let inputDisplay = document.querySelector('#input-display'); // Display
+		let clearEntry = document.querySelector('#clear-entry'); // Clear button
+		let memorize = document.querySelector('#memorize'); // Button to store memory
+		let displayMemory = document.querySelector('#display-memory')
+		let memoryData; // Variable holding the memory value
+		let dot = document.querySelector('#dot'); // Decimal point button
+		let backspace = document.querySelector('#backspace'); // Backspace button
+		let operator = document.querySelectorAll('#operator'); // Math operator buttons
+		let operatorSign; // Current operator
+		let firstValue = 0; // First value of computation
+		let secondValue = 0; // Second value of computation
+		let equals = document.querySelector('#equals'); // Equals button
+		let equalsValue;
+		let clearDisplayBoolean = false; // Boolean determining whether to append or rewrite values in the display box.
+
+		  //////////////////////////////////////////////////
+		 // Append or rewrite numbers according to state //
+		//////////////////////////////////////////////////
+		for(let i = 0; i < numbersKey.length; i++){
+			numbersKey[i].addEventListener('click', function(){
+				event.preventDefault();
+				let inputValue = numbersKey[i].innerHTML;
+				if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0'){
+					inputDisplay.append(inputValue);
+				} else {
+					clearDisplayBoolean = false;
+					inputDisplay.innerHTML = '';
+					inputDisplay.append(inputValue);
+				}			
+			});
+		};
+		dot.addEventListener('click', function(){
+			console.log(clearDisplayBoolean)
+			let dotEntry = dot.innerHTML
+			if((inputDisplay.innerHTML == '' && clearDisplayBoolean == false) || (inputDisplay.innerHTML != '' && clearDisplayBoolean == true)){
+				dotEntry = '0'+dotEntry;
+				console.log('dotEntry: ' +dotEntry)
+				inputDisplay.innerHTML = dotEntry;
+				clearDisplayBoolean = false;
+			}
+			if(inputDisplay.innerHTML.indexOf('.') === -1 && inputDisplay.innerHTML != ''){
+				console.log('WTF!!!')
+				inputDisplay.append(dotEntry);
+			}
+		})
+
+		  ///////////////////////////////////////////////////////////////////////////////
+		 // Clear the display and reset all variables holding value except for memory //
+		///////////////////////////////////////////////////////////////////////////////
+		clearEntry.addEventListener('click', function(){
+			event.preventDefault();
+			inputDisplay.innerHTML = '';
+			clearDisplayBoolean = false;
+			// code remaining - still to reset variables that will eventually hold values during the cals...
+		});
+
+		  /////////////////////////////////////////////////
+		 // Delete entries one at a time with backspace //
+		/////////////////////////////////////////////////
+		backspace.addEventListener('click', function(){
+			let currentValue = inputDisplay.innerHTML;
+			let indexOfValueToBeDeleted;
+			for (let i = 0; i < currentValue.length; i++){
+				// valueToBeDeleted = currentValue[i];
+				indexOfValueToBeDeleted = i;
+			}
+			let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
+			inputDisplay.innerHTML = newValue;
+		})
+
+		  /////////////////////////////////////////
+		 // Store value in memory if applicable //
+		/////////////////////////////////////////
+		memorize.addEventListener('click', function(){
+			clearDisplayBoolean = true;
+			event.preventDefault();
+			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
+				let x = parseInt(inputDisplay.innerHTML);
+				console.log(x);
+				if(isNaN(x)){ // If the data is not a number...
+					inputDisplay.innerHTML = ('You can only store numerical values');
+				}
+				if(!isNaN(x)){ // If the data is a number...
+					console.log("I'm all the way in!!!");
+					memoryData = inputDisplay.innerHTML;
+				}
+			}
+			if(inputDisplay.innerHTML != '' && memoryData){ // ****** There is IS_data displayed and there IS_memory stored. ******
+				memoryData = inputDisplay.innerHTML;
+			}
+			if((inputDisplay.innerHTML == '' && !memoryData) || (inputDisplay.innerHTML == '' && memoryData)){ // ****** There is NO_data displayed and there is NO_memory stored OR  There is NO_data displayed and there is IS_memory stored******
+				inputDisplay.innerHTML = "Nothing to store!"
+			}
+		});
+
+		  //////////////////////////////////////////
+		 // Display value in memory if it exists //
+		//////////////////////////////////////////
+		displayMemory.addEventListener('click', function(){
+			clearDisplayBoolean = true;
+			event.preventDefault();
+			if(inputDisplay.innerHTML == '' && memoryData){ // ****** There is NO_data displayed and there IS_memory stored. ******
+				inputDisplay.innerHTML = memoryData;
+			}
+			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
+				inputDisplay.innerHTML = "Nothing stored yet!"
+			}
+			if(inputDisplay.innerHTML != '' && memoryData){ // ****** There is IS_data displayed and there IS_memory stored. ******
+				inputDisplay.innerHTML = '';
+				inputDisplay.innerHTML = memoryData;
+			}
+			if(inputDisplay.innerHTML == '' && !memoryData){ // ****** There is NO_data displayed and there is NO_memory stored. ******
+				inputDisplay.innerHTML = "Nothing stored yet!"
+			}
+		});
+
+		  ///////////////////////////////////////////
+		 // Store the first value and the operator//
+		///////////////////////////////////////////
+		for (let i = 0; i < operator.length; i++){
+			operator[i].addEventListener('click', function(){
+				operatorSign = this.innerHTML;
+				console.log(operatorSign);
+				switch (operatorSign){
+					case '/':
+					firstValue = Number(inputDisplay.innerHTML);
+					clearDisplayBoolean = true;
+					break;
+
+					case 'x':
+					firstValue = Number(inputDisplay.innerHTML);
+					clearDisplayBoolean = true;
+					break;
+
+					case '-':
+					firstValue = Number(inputDisplay.innerHTML);
+					clearDisplayBoolean = true;
+					break;
+
+					case '+':
+					firstValue = Number(inputDisplay.innerHTML);
+					clearDisplayBoolean = true;
+					break;
+				}
+			});
+		};
+
+		  //////////////////////////////////////////
+		 //////////// Compute numbers /////////////
+		//////////////////////////////////////////
+		equals.addEventListener('click', function(){
+			clearDisplayBoolean = true;
+			secondValue = Number(inputDisplay.innerHTML);
+			console.log('First value: ' +firstValue);
+			console.log('Operator sign: ' +operatorSign);
+			console.log('Second value: ' +secondValue);
+			if(!firstValue){
+				inputDisplay.innerHTML = 'Nothing to compute bozo!';
+				clearDisplayBoolean = true;
+			}
+
+			switch (operatorSign){
+				case '/':
+				equalsValue = (firstValue) / (secondValue);
+				inputDisplay.innerHTML = equalsValue;
+				firstValue = 0;
+				secondValue = 0;
+				operatorSign = '';
+				break;
+
+				case 'x':
+				equalsValue = (firstValue) * (secondValue);
+				inputDisplay.innerHTML = equalsValue;
+				firstValue = 0;
+				secondValue = 0;
+				operatorSign = '';
+				break;
+
+				case '-':
+				equalsValue = (firstValue) - (secondValue);
+				inputDisplay.innerHTML = equalsValue;
+				firstValue = 0;
+				secondValue = 0;
+				operatorSign = '';
+				break;
+
+				case '+':
+				equalsValue = (firstValue) + (secondValue);
+				inputDisplay.innerHTML = equalsValue;
+				firstValue = 0;
+				secondValue = 0;
+				operatorSign = '';
+			}
+		})
+
+	</script>
+	
+</body>
+</html>
