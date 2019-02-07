@@ -1,0 +1,461 @@
+body {
+	
+}
+/*************************************************Main Content*******************************************************/
+.container-fluid {
+	color: #464a4e;
+	font-family: 'Fjalla One', sans-serif;
+}
+/******************* 1. Landing Page */
+
+.row {
+	padding: 15px;
+	margin-bottom: 0;
+}
+
+/*Header/Navbar*/
+
+#header {
+	padding-left: 80px;
+	padding-right: 40px;
+	background: url("../images/falc3.jpg") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#name-container {
+	display: flex;
+	align-items: center;
+}
+
+#name {
+	cursor: pointer;
+	margin: 0;
+}
+
+a {
+	color: #464a4e;
+}
+
+a:hover {
+	color: #FF530D;
+}
+
+i:hover {
+	color: #FF530D;
+}
+
+#navbar {
+	display: flex;
+	align-items: center;
+}
+
+ul {
+	
+}
+
+#home {
+	margin-top: -3px;
+	margin-right: -3px;
+}
+
+#contact {
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+/* 1.Work */
+
+#brief {
+	margin-top: 20px;
+	padding-right: 0;
+}
+
+#job-title {
+	margin-top: 8%;
+	border-left: 2px solid #868e96;
+	padding-left: 15px;
+}
+
+#boldletter {
+	color: #FF530D;
+	font-weight: bold;
+	font-size: 2em;
+}
+
+#mission-statement {
+	padding-left: 20px;
+}
+
+#learn-more {
+	margin-left: 20px;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+/*Qualities*/
+#quality-initial1,
+#quality-initial2 {
+	font-family: 'Monoton', cursive;
+	
+}
+
+#quality-initial1 {
+	color: #FF530D;
+}
+
+#quality-initial2 {
+	color: #FFF;
+}
+
+#quality1 {
+	margin-top: 150px;
+	text-align: center;
+	min-height: 530px;
+	font-family: 'Righteous', cursive;
+	font-size: 7em;
+	-ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+}
+
+#quality2 {
+	margin-left: -35px;
+	margin-top: 150px;
+	font-family: 'Righteous', cursive;
+	font-size: 5em;
+}
+/*pic*/
+#mypic {
+	border-radius: 10px;
+}
+
+
+/********************** 2. About */
+
+#about-page {
+	background: url("../images/hoffman.png");
+	min-height: 760px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#banner {
+	max-height: 130px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-center;
+}
+
+#about-me {
+	font-family: 'Righteous', cursive;
+	font-size: 7em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#about-para {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+#about-story {
+	background-color: #464a4e;
+	min-height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#about-focus {
+	background-color: #fff;
+	min-height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#story {
+	color: #fff;
+}
+
+/********************** 3. Portfolio */
+
+#portfolio-page {
+	background: url("../images/brickwall_@2X.png");
+	color: #464a4e;
+}
+
+#business_center {
+	font-size: .5em;
+	margin-left: 20px;
+}
+
+#quality3 {
+	margin-top: 300px;
+	font-family: 'Righteous', cursive;
+	font-size: 7em;
+	-ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#portfolio-cards {
+	padding: 0;
+	margin: 22px auto;
+	border: 0;
+}
+
+#project-title {
+	font-weight: bold;
+}
+
+.material-icons {
+	color: #464a4e;
+}
+
+.card-content {
+	background: url("../images/brickwall_@2X.png");
+}
+
+
+
+
+/*******************************************Media Queries************************************************/
+
+
+/* Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767px) { 
+	 
+	/*Header/Navbar*/
+
+	#header {
+		padding-left: 20px;
+		padding-right: 20px;
+		background: url("../images/falc3.jpg") no-repeat center center; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+
+	#name-container {
+		display: flex;
+		align-items: center;
+	}
+
+	#name {
+		cursor: pointer;
+		margin: 0;
+	}
+
+	a {
+		color: #464a4e;
+	}
+
+	a:hover {
+		color: #FF530D;
+	}
+
+	i:hover {
+		color: #FF530D;
+	}
+
+	#navbar {
+		display: flex;
+		align-items: center;
+	}
+
+	ul {
+		
+	}
+
+	#home {
+		margin-top: -3px;
+		margin-right: -3px;
+	}
+
+	#contact {
+		border-radius: 20px;
+		cursor: pointer;
+	}
+
+	/* 1.Work */
+
+	#brief {
+		margin-top: 20px;
+		padding-right: 0;
+	}
+
+	#job-title {
+		margin-top: 8%;
+		border-left: 2px solid #868e96;
+		padding-left: 15px;
+	}
+
+	#boldletter {
+		color: #FF530D;
+		font-weight: bold;
+		font-size: 2em;
+	}
+
+	#mission-statement {
+		padding-left: 20px;
+	}
+
+	#learn-more {
+		margin-left: 20px;
+		border-radius: 20px;
+		cursor: pointer;
+	}
+
+	/*Qualities*/
+	#quality-initial1,
+	#quality-initial2 {
+		font-family: 'Monoton', cursive;
+		
+	}
+
+	#quality-initial1 {
+		color: #FF530D;
+	}
+
+	#quality-initial2 {
+		color: #FFF;
+	}
+
+	#quality1 {
+		margin-top: 150px;
+		text-align: center;
+		min-height: 530px;
+		font-family: 'Righteous', cursive;
+		font-size: 7em;
+		-ms-transform: rotate(-90deg); /* IE 9 */
+	    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+	    transform: rotate(-90deg);
+	}
+
+	#quality2 {
+		margin-left: -35px;
+		margin-top: 150px;
+		font-family: 'Righteous', cursive;
+		font-size: 5em;
+	}
+	/*pic*/
+	#mypic {
+		border-radius: 10px;
+	}
+
+}
+
+
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575px) {
+
+	/*Header/Navbar*/
+	
+	#header {
+		padding: 20px 20px 0 20px;
+		background: url("../images/falc3-sm.jpg") no-repeat center center; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+
+	#name-container,
+	#navbar {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#brief {
+		margin-top: 0;
+	}
+	
+	/* 1.Work */
+
+	#job-title {
+		margin-left: 25px;
+		color: #fff;
+		border-left: 2px solid #fff;
+	}	
+
+	#mission-statement {
+		margin-left: 25px;
+		color: #fff;
+	}
+
+	#learn-more {
+		margin-left: 40px;
+	}
+		
+	/* Qualities */
+	#quality1 {
+		margin-top: -5px;
+		text-align: center;
+		min-height: 200px;
+		font-family: 'Righteous', cursive;
+		font-size: 4em;
+		-ms-transform: rotate(0deg); /* IE 9 */
+	    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+	    transform: rotate(0deg);
+	}
+
+	#quality2 {
+		margin-left: 0;
+		margin-top: 20px;
+		font-family: 'Righteous', cursive;
+		font-size: 4em;
+		text-align: center;
+	}
+	/********************** 2. About */
+	
+	#about-me {
+		font-size: 4em;
+	}
+
+	#about-story {
+		min-height: 300px;
+	}
+
+	#about-focus {
+		min-height: 300px;
+	}
+	
+	/********************** 3. Portfolio */
+
+	#quality3 {
+		margin-top: auto;
+		min-height: 84.8px;
+		font-family: 'Righteous', cursive;
+		font-size: 4em;
+		-ms-transform: rotate(0deg); /* IE 9 */
+	    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+	    transform: rotate(0deg);
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991px) { 
+
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199px) {
+
+}
+
+/*#868e96 #464a4e*/
