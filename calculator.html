@@ -127,6 +127,7 @@
 		let secondValue = 0; // Second value of computation
 		let equals = document.querySelector('#equals'); // Equals button
 		let equalsValue;
+		let finalResult;
 		let clearDisplayBoolean = false; // Boolean determining whether to append or rewrite values in the display box.
 
 		  //////////////////////////////////////////////////
@@ -194,10 +195,9 @@
 				let x = parseInt(inputDisplay.innerHTML);
 				console.log(x);
 				if(isNaN(x)){ // If the data is not a number...
-					inputDisplay.innerHTML = ('Store numerical values ONLY!');
+					inputDisplay.innerHTML = ('Store numerical values ONLY');
 				}
 				if(!isNaN(x)){ // If the data is a number...
-					console.log("I'm all the way in!!!");
 					memoryData = inputDisplay.innerHTML;
 				}
 			}
@@ -205,7 +205,7 @@
 				memoryData = inputDisplay.innerHTML;
 			}
 			if((inputDisplay.innerHTML == '' && !memoryData) || (inputDisplay.innerHTML == '' && memoryData)){ // ****** There is NO_data displayed and there is NO_memory stored OR  There is NO_data displayed and there is IS_memory stored******
-				inputDisplay.innerHTML = "Nothing to store!"
+				inputDisplay.innerHTML = "Nothing to store"
 			}
 		});
 
@@ -219,14 +219,14 @@
 				inputDisplay.innerHTML = memoryData;
 			}
 			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
-				inputDisplay.innerHTML = "Nothing stored yet!"
+				inputDisplay.innerHTML = "Nothing stored yet"
 			}
 			if(inputDisplay.innerHTML != '' && memoryData){ // ****** There is IS_data displayed and there IS_memory stored. ******
 				inputDisplay.innerHTML = '';
 				inputDisplay.innerHTML = memoryData;
 			}
 			if(inputDisplay.innerHTML == '' && !memoryData){ // ****** There is NO_data displayed and there is NO_memory stored. ******
-				inputDisplay.innerHTML = "Nothing stored yet!"
+				inputDisplay.innerHTML = "Nothing stored yet"
 			}
 		});
 
@@ -271,38 +271,41 @@
 			console.log('Operator sign: ' +operatorSign);
 			console.log('Second value: ' +secondValue);
 			if(!firstValue){
-				inputDisplay.innerHTML = 'Nothing to compute bozo!';
+				inputDisplay.innerHTML = 'Nothing to compute';
 				clearDisplayBoolean = true;
 			}
 
 			switch (operatorSign){
 				case '/':
-				equalsValue = (firstValue) / (secondValue);
-				inputDisplay.innerHTML = equalsValue.toFixed(7);
+				equalsValue = firstValue / secondValue;
+				finalResult = equalsValue.toString().slice(0, 12)
+				inputDisplay.innerHTML = finalResult;
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
 				break;
 
 				case 'x':
-				equalsValue = (firstValue) * (secondValue);
-				inputDisplay.innerHTML = equalsValue.toFixed(7);
+				equalsValue = firstValue * secondValue;
+				finalResult = equalsValue.toString().slice(0, 12)
+				inputDisplay.innerHTML = finalResult;
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
 				break;
 
 				case '-':
-				equalsValue = (firstValue) - (secondValue);
-				inputDisplay.innerHTML = equalsValue.toFixed(7);
-				firstValue = 0;
+				equalsValue = firstValue - secondValue;
+				finalResult = equalsValue.toString().slice(0, 12)
+				inputDisplay.innerHTML = finalResult;
 				secondValue = 0;
 				operatorSign = '';
 				break;
 
 				case '+':
-				equalsValue = (firstValue) + (secondValue);
-				inputDisplay.innerHTML = equalsValue.toFixed(7);
+				equalsValue = firstValue + secondValue;
+				finalResult = equalsValue.toString().slice(0, 12)
+				inputDisplay.innerHTML = finalResult;
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
