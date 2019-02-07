@@ -76,7 +76,7 @@
 	</style>
 </head>
 <body>
-	<h1 id=title>Falc's calculator</h1>
+	<h1 id=title>Calculator</h1>
 
 	<div class="container">
 		<div class="row">
@@ -237,27 +237,8 @@
 			operator[i].addEventListener('click', function(){
 				operatorSign = this.innerHTML;
 				console.log(operatorSign);
-				switch (operatorSign){
-					case '/':
-					firstValue = Number(inputDisplay.innerHTML);
-					clearDisplayBoolean = true;
-					break;
-
-					case 'x':
-					firstValue = Number(inputDisplay.innerHTML);
-					clearDisplayBoolean = true;
-					break;
-
-					case '-':
-					firstValue = Number(inputDisplay.innerHTML);
-					clearDisplayBoolean = true;
-					break;
-
-					case '+':
-					firstValue = Number(inputDisplay.innerHTML);
-					clearDisplayBoolean = true;
-					break;
-				}
+				firstValue = Number(inputDisplay.innerHTML);
+				clearDisplayBoolean = true;
 			});
 		};
 
