@@ -20,7 +20,7 @@
 	<style>
 
 		#title {
-			margin: 20px auto;
+			margin-bottom: 0;
 			text-align: center;
 		}
 		.input {
@@ -79,6 +79,7 @@
 		@media (max-width: 575px) {
 			.container {
 				max-width: 100vw;
+				max-height: 100vh;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -204,10 +205,6 @@
 		/////////////////////////////////////////////////
 		backspace.addEventListener('click', function(event){
 			event.preventDefault();
-			for (let i = 0; i < operator.length; i++){
-				operator[i].style.background = '';
-				operator[i].style.color = '';
-			}
 			let currentValue = inputDisplay.innerHTML;
 			let indexOfValueToBeDeleted;
 			for (let i = 0; i < currentValue.length; i++){
@@ -271,12 +268,13 @@
 		///////////////////////////////////////////
 		for (let i = 0; i < operator.length; i++){
 			operator[i].addEventListener('click', function(event){
+				console.log('Operator clicked.')
 				event.preventDefault();
 				for (let i = 0; i < operator.length; i++){
 					operator[i].style.background = '';
 					operator[i].style.color = '';
 				}
-				this.setAttribute('style', 'background: #23e94f; color: #fff;');
+				this.setAttribute('style', '-moz-transition: background .4s ease-in; -o-transition: background .4s ease-in; -webkit-transition: background .4s ease-in; transition: background .4s ease-in; background: #ff0000; color: #fff;');
 				operatorSign = this.innerHTML;
 				firstValue = Number(inputDisplay.innerHTML);
 				clearDisplayBoolean = true;
@@ -356,9 +354,15 @@
 		function validateMyReturn() {
 			console.log('Final Result length: ' +finalResult.length);
 			if(finalResult.indexOf('e') != -1 && finalResult.length > 12) {
-				let eIndex = finalResult.indexOf('e');
-				console.log('eIndex: ' +eIndex);
-				inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
+				if(finalResult.indexOf('-') != -1){
+					console.log('I guess someone is trying an intricate operation.');
+					let lastTwo = Number(finalResult.substr(finalResult.length - 2));
+					inputDisplay.innerHTML = Math.round(Number(finalResult.slice(0, 4)))+ 'e-' + lastTwo;
+				} else {
+					let eIndex = finalResult.indexOf('e');
+					console.log('eIndex: ' +eIndex);
+					inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
+				}
 			}
 			if(finalResult.indexOf('e') === -1 && finalResult.length > 12){
 				let differenceInNumberOfDigits = finalResult.length - 12; // 12 is the maximum number of characters we want to display for visiual purposes.
@@ -371,6 +375,13 @@
 			if(finalResult.indexOf('.') != -1 && finalResult.indexOf('e') === -1 && finalResult.length > 12){
 				console.log('I guess it is just a fraction.')
 				inputDisplay.innerHTML = finalResult.slice(0, 12);
+			}
+			if(finalResult.indexOf('e') != -1 && finalResult.length <= 12){
+				if(finalResult.indexOf('+') != -1){
+					console.log('I guess someone entered a lot of zeros in a row.')
+					let plusIndex = finalResult.indexOf('+');
+					inputDisplay.innerHTML = finalResult.slice(0, plusIndex) + finalResult[plusIndex + 1] + finalResult[plusIndex + 2];
+				}
 			}
 			if(finalResult.indexOf('e') === -1 && finalResult.length <= 12){
 				console.log('I guess it is just a simple number less than or equal to 12 digits long.')
