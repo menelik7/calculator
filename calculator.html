@@ -37,8 +37,8 @@
 		}
 
 		#input-display {
-			padding: 0 80px;
-			margin-bottom: 10px;
+			padding: 0 85px;
+			margin-bottom: 5px;
 			height: 95px;
 			font-size:35px;
 			background: #333;
@@ -67,7 +67,10 @@
 				justify-content: center;
 				align-items: center;
 			}
-
+			
+			#input-display {
+				padding: 0 50px;
+			}
 			#input-display {
 				font-size:30px;
 			}
@@ -117,7 +120,7 @@
 		let inputDisplay = document.querySelector('#input-display'); // Display
 		let clearEntry = document.querySelector('#clear-entry'); // Clear button
 		let memorize = document.querySelector('#memorize'); // Button to store memory
-		let displayMemory = document.querySelector('#display-memory')
+		let displayMemory = document.querySelector('#display-memory') // Button to display memory
 		let memoryData; // Variable holding the memory value
 		let dot = document.querySelector('#dot'); // Decimal point button
 		let backspace = document.querySelector('#backspace'); // Backspace button
@@ -128,53 +131,59 @@
 		let equals = document.querySelector('#equals'); // Equals button
 		let equalsValue;
 		let finalResult;
-		let clearDisplayBoolean = false; // Boolean determining whether to append or rewrite values in the display box.
+		let clearDisplayBoolean = false; // Boolean determining whether to append or rewrite values in the display box - WHEN IT'S "false" (original value), WE APPEND; AND WHEN IT'S "true", WE REWRITE.
+		let inputDisplayStringLength = 0;
 
 		  //////////////////////////////////////////////////
 		 // Append or rewrite numbers according to state //
 		//////////////////////////////////////////////////
 		for(let i = 0; i < numbersKey.length; i++){
-			numbersKey[i].addEventListener('click', function(){
+			numbersKey[i].addEventListener('click', function(event){
 				event.preventDefault();
 				let inputValue = numbersKey[i].innerHTML;
-				if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0'){
-					inputDisplay.append(inputValue);
-				} else {
-					clearDisplayBoolean = false;
-					inputDisplay.innerHTML = '';
-					inputDisplay.append(inputValue);
-				}			
+				if(inputDisplayStringLength < 12){
+					if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0'){
+						inputDisplay.append(inputValue);
+					} else {
+						clearDisplayBoolean = false;
+						inputDisplay.innerHTML = '';
+						inputDisplay.append(inputValue);
+						inputDisplayStringLength = 0;
+					}
+					inputDisplayStringLength += 1;	
+					console.log('inputDisplayStringLength: ' +inputDisplayStringLength)
+				}
 			});
 		};
-		dot.addEventListener('click', function(){
-			console.log(clearDisplayBoolean)
+		dot.addEventListener('click', function(event){ // Decimal point button.
+			event.preventDefault();
 			let dotEntry = dot.innerHTML
-			if((inputDisplay.innerHTML == '' && clearDisplayBoolean == false) || (inputDisplay.innerHTML != '' && clearDisplayBoolean == true)){
+			if((inputDisplay.innerHTML == '' && clearDisplayBoolean == false) || (inputDisplay.innerHTML != '' && clearDisplayBoolean == true)){ // There is NO_data displayed and our clearDisplayBoolean is @ its original value OR there IS_data displayed and our clearDisplayBoolean IS_true (operator engaged and firstValue == true OR computation is complete) - WE CAN REWRITE THE DISPLAY AND IF OUR DECIMAL POINT IS THE FIRST CHOSEN CHARACTER, PRECEDE IT A "0". 
 				dotEntry = '0'+dotEntry;
-				console.log('dotEntry: ' +dotEntry)
 				inputDisplay.innerHTML = dotEntry;
 				clearDisplayBoolean = false;
 			}
-			if(inputDisplay.innerHTML.indexOf('.') === -1 && inputDisplay.innerHTML != ''){
-				console.log('WTF!!!')
+			if(inputDisplay.innerHTML != '' && inputDisplay.innerHTML.indexOf('.') === -1){ // There IS_data displayed and there is NO_decimal point - WE APPEND OUR DECIMAL POINT TO THE DISPLAY.
 				inputDisplay.append(dotEntry);
 			}
+			inputDisplayStringLength =+ 1;
 		})
 
 		  ///////////////////////////////////////////////////////////////////////////////
 		 // Clear the display and reset all variables holding value except for memory //
 		///////////////////////////////////////////////////////////////////////////////
-		clearEntry.addEventListener('click', function(){
+		clearEntry.addEventListener('click', function(event){
 			event.preventDefault();
 			inputDisplay.innerHTML = '';
 			clearDisplayBoolean = false;
-			// code remaining - still to reset variables that will eventually hold values during the cals...
+			inputDisplayStringLength = 0;
 		});
 
 		  /////////////////////////////////////////////////
 		 // Delete entries one at a time with backspace //
 		/////////////////////////////////////////////////
-		backspace.addEventListener('click', function(){
+		backspace.addEventListener('click', function(event){
+			event.preventDefault();
 			let currentValue = inputDisplay.innerHTML;
 			let indexOfValueToBeDeleted;
 			for (let i = 0; i < currentValue.length; i++){
@@ -183,19 +192,20 @@
 			}
 			let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
 			inputDisplay.innerHTML = newValue;
+			inputDisplayStringLength -= 1;
+			console.log(inputDisplayStringLength);
 		})
 
 		  /////////////////////////////////////////
 		 // Store value in memory if applicable //
 		/////////////////////////////////////////
-		memorize.addEventListener('click', function(){
-			clearDisplayBoolean = true;
+		memorize.addEventListener('click', function(event){
 			event.preventDefault();
+			clearDisplayBoolean = true;
 			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
 				let x = parseInt(inputDisplay.innerHTML);
-				console.log(x);
 				if(isNaN(x)){ // If the data is not a number...
-					inputDisplay.innerHTML = ('Store numerical values ONLY');
+					inputDisplay.innerHTML = ('Store numbers only');
 				}
 				if(!isNaN(x)){ // If the data is a number...
 					memoryData = inputDisplay.innerHTML;
@@ -207,14 +217,15 @@
 			if((inputDisplay.innerHTML == '' && !memoryData) || (inputDisplay.innerHTML == '' && memoryData)){ // ****** There is NO_data displayed and there is NO_memory stored OR  There is NO_data displayed and there is IS_memory stored******
 				inputDisplay.innerHTML = "Nothing to store"
 			}
+			inputDisplayStringLength = 0;
 		});
 
 		  //////////////////////////////////////////
 		 // Display value in memory if it exists //
 		//////////////////////////////////////////
-		displayMemory.addEventListener('click', function(){
-			clearDisplayBoolean = true;
+		displayMemory.addEventListener('click', function(event){
 			event.preventDefault();
+			clearDisplayBoolean = true;
 			if(inputDisplay.innerHTML == '' && memoryData){ // ****** There is NO_data displayed and there IS_memory stored. ******
 				inputDisplay.innerHTML = memoryData;
 			}
@@ -228,38 +239,38 @@
 			if(inputDisplay.innerHTML == '' && !memoryData){ // ****** There is NO_data displayed and there is NO_memory stored. ******
 				inputDisplay.innerHTML = "Nothing stored yet"
 			}
+			inputDisplayStringLength = 0;
 		});
 
 		  ///////////////////////////////////////////
 		 // Store the first value and the operator//
 		///////////////////////////////////////////
 		for (let i = 0; i < operator.length; i++){
-			operator[i].addEventListener('click', function(){
+			operator[i].addEventListener('click', function(event){
+				event.preventDefault();
 				operatorSign = this.innerHTML;
-				console.log(operatorSign);
 				firstValue = Number(inputDisplay.innerHTML);
 				clearDisplayBoolean = true;
+				inputDisplayStringLength = 0;
+				console.log('inputDisplayStringLength: ' +inputDisplayStringLength)
 			});
 		};
 
 		  //////////////////////////////////////////
 		 //////////// Compute numbers /////////////
 		//////////////////////////////////////////
-		equals.addEventListener('click', function(){
+		equals.addEventListener('click', function(event){
+			event.preventDefault();
 			clearDisplayBoolean = true;
 			secondValue = Number(inputDisplay.innerHTML);
 			console.log('First value: ' +firstValue);
 			console.log('Operator sign: ' +operatorSign);
 			console.log('Second value: ' +secondValue);
-			if(!firstValue){
-				inputDisplay.innerHTML = 'Nothing to compute';
-				clearDisplayBoolean = true;
-			}
 
 			switch (operatorSign){
 				case '/':
-				equalsValue = firstValue / secondValue;
-				finalResult = equalsValue.toString().slice(0, 12)
+				equalsValue = ((firstValue * 10) / (secondValue * 10));
+				finalResult = equalsValue.toString().slice(0, 12);
 				inputDisplay.innerHTML = finalResult;
 				firstValue = 0;
 				secondValue = 0;
@@ -267,31 +278,53 @@
 				break;
 
 				case 'x':
-				equalsValue = firstValue * secondValue;
-				finalResult = equalsValue.toString().slice(0, 12)
-				inputDisplay.innerHTML = finalResult;
+				equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
+				finalResult = equalsValue.toString();
+				console.log('Final Result length: ' +finalResult.length);
+				if(finalResult.indexOf('e') != -1 && finalResult.length > 12) {
+					let eIndex = finalResult.indexOf('e');
+					console.log('eIndex: ' +eIndex);
+					inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
+				}
+				if(finalResult.indexOf('e') === -1 && finalResult.length > 12){
+					let differenceInNumberOfDigits = finalResult.length - 12; // 12 is the maximum number of characters we want to display for visiual purposes.
+					console.log('finalResult.indexOf(e): ' +finalResult.indexOf('e'))
+					console.log('differenceInNumberOfDigits: ' +differenceInNumberOfDigits);
+					let slicedFinalResult = finalResult.slice(0, 3);
+					console.log('slicedFinalResult: ' +slicedFinalResult);
+					inputDisplay.innerHTML = (slicedFinalResult / 100) + 'e' +(differenceInNumberOfDigits + (9 + 2)).toString(); // The 2 extra exponent values are because we are moving the decimal point on slicedFinalResult by 2 places.
+				}
+				if(finalResult.indexOf('e') === -1 && finalResult.length <= 12){
+					inputDisplay.innerHTML = finalResult;
+				}
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
 				break;
 
 				case '-':
-				equalsValue = firstValue - secondValue;
-				finalResult = equalsValue.toString().slice(0, 12)
+				equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
+				finalResult = equalsValue.toString().slice(0, 12);
 				inputDisplay.innerHTML = finalResult;
 				secondValue = 0;
 				operatorSign = '';
 				break;
 
 				case '+':
-				equalsValue = firstValue + secondValue;
-				finalResult = equalsValue.toString().slice(0, 12)
+				equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
+				finalResult = equalsValue.toString().slice(0, 12);
 				inputDisplay.innerHTML = finalResult;
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
 			}
-		})
+			if(isNaN(finalResult)){ // If the final result is Not a Number...
+				inputDisplay.innerHTML = 'Nothing to compute';
+				clearDisplayBoolean = true;
+			}
+			console.log('Final Result: ' +finalResult+ '\n\r');
+			inputDisplayStringLength = 0;
+		});
 
 	</script>
 	
