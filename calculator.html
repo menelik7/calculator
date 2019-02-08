@@ -35,6 +35,22 @@
 			cursor: pointer;
 			font-size: 35px;
 		}
+	
+		#operator,
+		#memorize,
+		#display-memory,
+		#dot,
+		#backspace,
+		#equals,
+		#clear-entry {
+			background: #f6f6f6;
+		}
+		
+		#clear-entry,
+		#memorize,
+		#display-memory {
+			font-size: 30px
+		}
 
 		#input-display {
 			padding: 0 85px;
@@ -86,26 +102,26 @@
 			<div class="col-12 col-lg-8 offset-lg-2" id="main-container">
 				<div class="row">
 					<div class="col-12" id="input-display"></div>
-					<div class="col-3 input" id="clear-entry" style="background: #f6f6f6; font-size: 30px;">CE</div>
-					<div class="col-3 input" id="memorize" style="background: #f6f6f6; font-size: 30px;">M+</div>
-					<div class="col-3 input" id="display-memory" style="background: #f6f6f6; font-size: 30px;">M</div>				
-					<div class="col-3 input" id="operator" style="background: #f6f6f6">/</div>
+					<div class="col-3 input" id="clear-entry">CE</div>
+					<div class="col-3 input" id="memorize">M+</div>
+					<div class="col-3 input" id="display-memory">M</div>
+					<div class="col-3 input" id="operator">/</div>
 					<div class="col-3 input" id="numbers">7</div>
 					<div class="col-3 input" id="numbers">8</div>
 					<div class="col-3 input" id="numbers">9</div>
-					<div class="col-3 input" id="operator" style="background: #f6f6f6">x</div>
+					<div class="col-3 input" id="operator">x</div>
 					<div class="col-3 input" id="numbers">4</div>
 					<div class="col-3 input" id="numbers">5</div>
 					<div class="col-3 input" id="numbers">6</div>
-					<div class="col-3 input" id="operator" style="background: #f6f6f6">-</div>
+					<div class="col-3 input" id="operator">-</div>
 					<div class="col-3 input" id="numbers">1</div>
 					<div class="col-3 input" id="numbers">2</div>
 					<div class="col-3 input" id="numbers">3</div>
-					<div class="col-3 input" id="operator" style="background: #f6f6f6">+</div>
-					<div class="col-3 input" id="dot" style="background: #f6f6f6">.</div>
+					<div class="col-3 input" id="operator">+</div>
+					<div class="col-3 input" id="dot">.</div>
 					<div class="col-3 input" id="numbers">0</div>
-					<div class="col-3 input" id="backspace" style="background: #f6f6f6"><i class="material-icons">&#xe14a;</i></div>
-					<div class="col-3 input" id="equals" style="background: #f6f6f6">=</div>
+					<div class="col-3 input" id="backspace"><i class="material-icons">&#xe14a;</i></div>
+					<div class="col-3 input" id="equals">=</div>
 				</div>
 			</div>
 			<div class="col-12 col-md-6">
@@ -174,6 +190,10 @@
 		///////////////////////////////////////////////////////////////////////////////
 		clearEntry.addEventListener('click', function(event){
 			event.preventDefault();
+			for (let i = 0; i < operator.length; i++){
+				operator[i].style.background = '';
+				operator[i].style.color = '';
+			}
 			inputDisplay.innerHTML = '';
 			clearDisplayBoolean = false;
 			inputDisplayStringLength = 0;
@@ -184,6 +204,10 @@
 		/////////////////////////////////////////////////
 		backspace.addEventListener('click', function(event){
 			event.preventDefault();
+			for (let i = 0; i < operator.length; i++){
+				operator[i].style.background = '';
+				operator[i].style.color = '';
+			}
 			let currentValue = inputDisplay.innerHTML;
 			let indexOfValueToBeDeleted;
 			for (let i = 0; i < currentValue.length; i++){
@@ -248,6 +272,11 @@
 		for (let i = 0; i < operator.length; i++){
 			operator[i].addEventListener('click', function(event){
 				event.preventDefault();
+				for (let i = 0; i < operator.length; i++){
+					operator[i].style.background = '';
+					operator[i].style.color = '';
+				}
+				this.setAttribute('style', 'background: #23e94f; color: #fff;');
 				operatorSign = this.innerHTML;
 				firstValue = Number(inputDisplay.innerHTML);
 				clearDisplayBoolean = true;
@@ -261,6 +290,14 @@
 		//////////////////////////////////////////
 		equals.addEventListener('click', function(event){
 			event.preventDefault();
+			for (let i = 0; i < operator.length; i++){
+				operator[i].style.background = '';
+				operator[i].style.color = '';
+			}
+			if(!firstValue){ // If the final result is Not a Number...
+				inputDisplay.innerHTML = 'Nothing to compute';
+				clearDisplayBoolean = true;
+			}
 			clearDisplayBoolean = true;
 			secondValue = Number(inputDisplay.innerHTML);
 			console.log('First value: ' +firstValue);
@@ -270,8 +307,8 @@
 			switch (operatorSign){
 				case '/':
 				equalsValue = ((firstValue * 10) / (secondValue * 10));
-				finalResult = equalsValue.toString().slice(0, 12);
-				inputDisplay.innerHTML = finalResult;
+				finalResult = equalsValue.toString();
+				validateMyReturn()
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
@@ -280,23 +317,7 @@
 				case 'x':
 				equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
 				finalResult = equalsValue.toString();
-				console.log('Final Result length: ' +finalResult.length);
-				if(finalResult.indexOf('e') != -1 && finalResult.length > 12) {
-					let eIndex = finalResult.indexOf('e');
-					console.log('eIndex: ' +eIndex);
-					inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
-				}
-				if(finalResult.indexOf('e') === -1 && finalResult.length > 12){
-					let differenceInNumberOfDigits = finalResult.length - 12; // 12 is the maximum number of characters we want to display for visiual purposes.
-					console.log('finalResult.indexOf(e): ' +finalResult.indexOf('e'))
-					console.log('differenceInNumberOfDigits: ' +differenceInNumberOfDigits);
-					let slicedFinalResult = finalResult.slice(0, 3);
-					console.log('slicedFinalResult: ' +slicedFinalResult);
-					inputDisplay.innerHTML = (slicedFinalResult / 100) + 'e' +(differenceInNumberOfDigits + (9 + 2)).toString(); // The 2 extra exponent values are because we are moving the decimal point on slicedFinalResult by 2 places.
-				}
-				if(finalResult.indexOf('e') === -1 && finalResult.length <= 12){
-					inputDisplay.innerHTML = finalResult;
-				}
+				validateMyReturn()
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
@@ -304,16 +325,17 @@
 
 				case '-':
 				equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-				finalResult = equalsValue.toString().slice(0, 12);
-				inputDisplay.innerHTML = finalResult;
+				finalResult = equalsValue.toString();
+				validateMyReturn()
+				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
 				break;
 
 				case '+':
 				equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-				finalResult = equalsValue.toString().slice(0, 12);
-				inputDisplay.innerHTML = finalResult;
+				finalResult = equalsValue.toString();
+				validateMyReturn()
 				firstValue = 0;
 				secondValue = 0;
 				operatorSign = '';
@@ -325,6 +347,36 @@
 			console.log('Final Result: ' +finalResult+ '\n\r');
 			inputDisplayStringLength = 0;
 		});
+
+		  //////////////////////////////////////////
+		 /////////////// Functions ////////////////
+		//////////////////////////////////////////
+
+		// Function that checks the returned value and manupilates it to render an easily understandable display.
+		function validateMyReturn() {
+			console.log('Final Result length: ' +finalResult.length);
+			if(finalResult.indexOf('e') != -1 && finalResult.length > 12) {
+				let eIndex = finalResult.indexOf('e');
+				console.log('eIndex: ' +eIndex);
+				inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
+			}
+			if(finalResult.indexOf('e') === -1 && finalResult.length > 12){
+				let differenceInNumberOfDigits = finalResult.length - 12; // 12 is the maximum number of characters we want to display for visiual purposes.
+				console.log('finalResult.indexOf(e): ' +finalResult.indexOf('e'))
+				console.log('differenceInNumberOfDigits: ' +differenceInNumberOfDigits);
+				let slicedFinalResult = finalResult.slice(0, 3);
+				console.log('slicedFinalResult: ' +slicedFinalResult);
+				inputDisplay.innerHTML = (slicedFinalResult / 100) + 'e' +(differenceInNumberOfDigits + (9 + 2)).toString(); // The 2 extra exponent values are because we are moving the decimal point on slicedFinalResult by 2 places.
+			}
+			if(finalResult.indexOf('.') != -1 && finalResult.indexOf('e') === -1 && finalResult.length > 12){
+				console.log('I guess it is just a fraction.')
+				inputDisplay.innerHTML = finalResult.slice(0, 12);
+			}
+			if(finalResult.indexOf('e') === -1 && finalResult.length <= 12){
+				console.log('I guess it is just a simple number less than or equal to 12 digits long.')
+				inputDisplay.innerHTML = finalResult.slice(0, 12);
+			}
+		}
 
 	</script>
 	
