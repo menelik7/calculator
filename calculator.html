@@ -191,11 +191,13 @@
 				dotEntry = '0'+dotEntry;
 				inputDisplay.innerHTML = dotEntry;
 				clearDisplayBoolean = false;
+				inputDisplayStringLength =+ 1;
 			}
 			if(inputDisplay.innerHTML != '' && inputDisplay.innerHTML.indexOf('.') === -1 && inputDisplayStringLength < 12){ // There IS_data displayed and there is NO_decimal point - WE APPEND OUR DECIMAL POINT TO THE DISPLAY.
 				inputDisplay.append(dotEntry);
+				inputDisplayStringLength =+ 1;
 			}
-			inputDisplayStringLength =+ 1;
+			
 		})
 
 		  ///////////////////////////////////////////////////////////////////////////////
