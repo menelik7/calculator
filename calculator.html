@@ -191,11 +191,9 @@
 				dotEntry = '0'+dotEntry;
 				inputDisplay.innerHTML = dotEntry;
 				clearDisplayBoolean = false;
-				inputDisplayStringLength =+ 1;
 			}
 			if(inputDisplay.innerHTML != '' && inputDisplay.innerHTML.indexOf('.') === -1 && inputDisplayStringLength < 12){ // There IS_data displayed and there is NO_decimal point - WE APPEND OUR DECIMAL POINT TO THE DISPLAY.
 				inputDisplay.append(dotEntry);
-				inputDisplayStringLength =+ 1;
 			}
 			
 		})
@@ -258,17 +256,21 @@
 			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
 				let x = parseInt(inputDisplay.innerHTML);
 				if(isNaN(x)){ // If the data is not a number...
-					inputDisplay.innerHTML = ('Store numbers only');
+					inputDisplay.innerHTML = 'Store numbers only';
 				}
-				if(!isNaN(x)){ // If the data is a number...
+				if(!isNaN(x) && inputDisplay.innerHTML != '0'){ // If the data is a number...
+					console.log('Messay loves me!')
 					memoryData = inputDisplay.innerHTML;
+				}
+				if(inputDisplay.innerHTML == '0'){ // If the data is a number...
+					inputDisplay.innerHTML = 'Store numbers &#8800; 0';
 				}
 			}
 			if(inputDisplay.innerHTML != '' && memoryData){ // ****** There is IS_data displayed and there IS_memory stored. ******
 				memoryData = inputDisplay.innerHTML;
 			}
 			if((inputDisplay.innerHTML == '' && !memoryData) || (inputDisplay.innerHTML == '' && memoryData)){ // ****** There is NO_data displayed and there is NO_memory stored OR  There is NO_data displayed and there is IS_memory stored******
-				inputDisplay.innerHTML = "Nothing to store"
+				inputDisplay.innerHTML = 'Nothing to store'
 			}
 			inputDisplayStringLength = 0;
 		});
@@ -306,7 +308,7 @@
 					operator[i].style.background = '';
 					operator[i].style.color = '';
 				}
-				this.setAttribute('style', '-moz-transition: background .3s ease-in; -o-transition: background .3s ease-in; -webkit-transition: background .3s ease-in; transition: background .3s ease-in; background: #61a61c; -moz-transition: color .2s ease-in; -o-transition: color .2s ease-in; -webkit-transition: color .2s ease-in; transition: color .2s ease-in; color: #fff;');
+				this.setAttribute('style', '-moz-transition: background .3s ease-in; -o-transition: background .3s ease-in; -webkit-transition: background .3s ease-in; transition: background .3s ease-in; background: #54830b; -moz-transition: color .2s ease-in; -o-transition: color .2s ease-in; -webkit-transition: color .2s ease-in; transition: color .2s ease-in; color: #fff;');
 				operatorSign = this.innerHTML;
 				firstValue = Number(inputDisplay.innerHTML);
 				clearDisplayBoolean = true;
@@ -323,10 +325,6 @@
 			for (let i = 0; i < operator.length; i++){
 				operator[i].style.background = '';
 				operator[i].style.color = '';
-			}
-			if(!firstValue && firstValue != '0'){ // If the final result is Not a Number...
-				inputDisplay.innerHTML = 'Nothing to compute';
-				clearDisplayBoolean = true;
 			}
 			clearDisplayBoolean = true;
 			secondValue = Number(inputDisplay.innerHTML);
@@ -366,8 +364,6 @@
 				inputDisplay.innerHTML = 'Nothing to compute';
 				clearDisplayBoolean = true;
 			}
-			console.log('Final Result: ' +finalResult+ '\n\r');
-			inputDisplayStringLength = 0;
 		});
 
 		  //////////////////////////////////////////
@@ -411,6 +407,8 @@
 				console.log('I guess it is just a simple number less than or equal to 12 digits long.')
 				inputDisplay.innerHTML = finalResult.slice(0, 12);
 			}
+			console.log('Final Result: ' +finalResult+ '\n\r');
+			inputDisplayStringLength = 0;
 		}
 
 	</script>
