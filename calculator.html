@@ -43,7 +43,7 @@
 		#backspace,
 		#equals,
 		#clear-entry {
-			background: #f6f6f6;
+			background: #d9d9d9;
 		}
 		
 		#clear-entry,
@@ -196,6 +196,9 @@
 				operator[i].style.color = '';
 			}
 			inputDisplay.innerHTML = '';
+			operatorSign = '';
+			firstValue = '';
+			secondValue = '';
 			clearDisplayBoolean = false;
 			inputDisplayStringLength = 0;
 		});
@@ -211,9 +214,23 @@
 				// valueToBeDeleted = currentValue[i];
 				indexOfValueToBeDeleted = i;
 			}
-			let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
-			inputDisplay.innerHTML = newValue;
-			inputDisplayStringLength -= 1;
+			if(clearDisplayBoolean == false){
+				let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
+				inputDisplay.innerHTML = newValue;
+			}
+			if(firstValue && clearDisplayBoolean == true) {
+				for (let i = 0; i < operator.length; i++){
+					operator[i].style.background = '';
+					operator[i].style.color = '';
+				}
+				operatorSign = '';
+				clearDisplayBoolean = false;
+				let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
+				inputDisplay.innerHTML = newValue;
+			}
+			if(inputDisplayStringLength > 0) {
+				inputDisplayStringLength -= 1;
+			}
 			console.log(inputDisplayStringLength);
 		})
 
@@ -274,7 +291,7 @@
 					operator[i].style.background = '';
 					operator[i].style.color = '';
 				}
-				this.setAttribute('style', '-moz-transition: background .4s ease-in; -o-transition: background .4s ease-in; -webkit-transition: background .4s ease-in; transition: background .4s ease-in; background: #ff0000; color: #fff;');
+				this.setAttribute('style', '-moz-transition: background .3s ease-in; -o-transition: background .3s ease-in; -webkit-transition: background .3s ease-in; transition: background .3s ease-in; background: #fda68b; -moz-transition: color .2s ease-in; -o-transition: color .2s ease-in; -webkit-transition: color .2s ease-in; transition: color .2s ease-in; color: #fff;');
 				operatorSign = this.innerHTML;
 				firstValue = Number(inputDisplay.innerHTML);
 				clearDisplayBoolean = true;
@@ -307,36 +324,28 @@
 				equalsValue = ((firstValue * 10) / (secondValue * 10));
 				finalResult = equalsValue.toString();
 				validateMyReturn()
-				firstValue = 0;
 				secondValue = 0;
-				operatorSign = '';
 				break;
 
 				case 'x':
 				equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
 				finalResult = equalsValue.toString();
 				validateMyReturn()
-				firstValue = 0;
 				secondValue = 0;
-				operatorSign = '';
 				break;
 
 				case '-':
 				equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
 				finalResult = equalsValue.toString();
 				validateMyReturn()
-				firstValue = 0;
 				secondValue = 0;
-				operatorSign = '';
 				break;
 
 				case '+':
 				equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
 				finalResult = equalsValue.toString();
 				validateMyReturn()
-				firstValue = 0;
 				secondValue = 0;
-				operatorSign = '';
 			}
 			if(isNaN(finalResult)){ // If the final result is Not a Number...
 				inputDisplay.innerHTML = 'Nothing to compute';
