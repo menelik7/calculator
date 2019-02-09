@@ -190,11 +190,13 @@
 			let dotEntry = dot.innerHTML
 			if((inputDisplay.innerHTML == '' && clearDisplayBoolean == false) || (inputDisplay.innerHTML != '' && clearDisplayBoolean == true)){ // There is NO_data displayed and our clearDisplayBoolean is @ its original value OR there IS_data displayed and our clearDisplayBoolean IS_true (operator engaged and firstValue == true OR computation is complete) - WE CAN REWRITE THE DISPLAY AND IF OUR DECIMAL POINT IS THE FIRST CHOSEN CHARACTER, PRECEDE IT A "0". 
 				dotEntry = '0'+dotEntry;
+				inputDisplayStringLength += 1;
 				inputDisplay.innerHTML = dotEntry;
 				clearDisplayBoolean = false;
 			}
 			if(inputDisplay.innerHTML != '' && inputDisplay.innerHTML.indexOf('.') === -1 && inputDisplayStringLength < 12){ // There IS_data displayed and there is NO_decimal point - WE APPEND OUR DECIMAL POINT TO THE DISPLAY.
 				inputDisplay.append(dotEntry);
+				inputDisplayStringLength += 1;
 			}
 			
 		})
