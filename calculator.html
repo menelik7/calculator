@@ -326,83 +326,44 @@
 			if(!secondValue) { // This determines that it's a new calculation
 				console.log('First running')
 				secondValue = Number(inputDisplay.innerHTML);
-				clearDisplayBoolean = true;
-				console.log('First value: ' +firstValue);
-				console.log('Operator sign: ' +operatorSign);
-				console.log('Second value: ' +secondValue);
-
-				switch (operatorSign){
-
-					case '/':
-					equalsValue = ((firstValue * 10) / (secondValue * 10));
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-					break;
-
-					case 'x':
-					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-					break;
-
-					case '-':
-					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-					break;
-
-					case '+':
-					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-				}
-				if(isNaN(finalResult)){ // If the final result is Not a Number...
-					inputDisplay.innerHTML = 'Nothing to compute';
-				}
-			} else { // This determines that the user is just pressing enter without entering new values
-				console.log('Second running')
-				clearDisplayBoolean = true;
-				console.log('First value: ' +firstValue);
-				console.log('Operator sign: ' +operatorSign);
-				console.log('Second value: ' +secondValue);
-
-				switch (operatorSign){
-
-					case '/':
-					equalsValue = ((firstValue * 10) / (secondValue * 10));
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-					break;
-
-					case 'x':
-					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-					break;
-
-					case '-':
-					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-					break;
-
-					case '+':
-					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-					finalResult = equalsValue.toString();
-					validateMyReturn();
-					firstValue = finalResult;
-				}
-				if(isNaN(finalResult)){ // If the final result is Not a Number...
-					inputDisplay.innerHTML = 'Nothing to compute';
-				}
 			}
+				clearDisplayBoolean = true;
+				console.log('First value: ' +firstValue);
+				console.log('Operator sign: ' +operatorSign);
+				console.log('Second value: ' +secondValue);
+
+				switch (operatorSign){
+
+					case '/':
+					equalsValue = ((firstValue * 10) / (secondValue * 10));
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case 'x':
+					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case '-':
+					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case '+':
+					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+				}
+				if(isNaN(finalResult)){ // If the final result is Not a Number...
+					inputDisplay.innerHTML = 'Nothing to compute';
+				}
 		});
 
 		  //////////////////////////////////////////
