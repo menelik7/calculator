@@ -115,7 +115,7 @@
 			<div class="col-12 col-lg-8 offset-lg-2" id="main-container">
 				<div class="row">
 					<div class="col-12" id="input-display">0</div>
-					<div class="col-3 input" id="clear-entry">C</div>
+					<div class="col-3 input" id="clear-entry" style="color: #03bf23; font-weight: 500;">C</div>
 					<div class="col-3 input" id="memorize">M+</div>
 					<div class="col-3 input" id="display-memory">M</div>
 					<div class="col-3 input" id="operator">/</div>
@@ -175,12 +175,13 @@
 						inputDisplay.append(inputValue);
 					} else {
 						clearDisplayBoolean = false;
+						finalResult = 0;
+						secondValue = 0;
 						inputDisplay.innerHTML = '';
 						inputDisplay.append(inputValue);
 						inputDisplayStringLength = 0;
 					}
 					inputDisplayStringLength += 1;	
-					console.log('inputDisplayStringLength: ' +inputDisplayStringLength)
 				}
 			});
 		};
@@ -244,7 +245,6 @@
 			if(inputDisplayStringLength > 0) {
 				inputDisplayStringLength -= 1;
 			}
-			console.log(inputDisplayStringLength);
 		})
 
 		  /////////////////////////////////////////
@@ -259,7 +259,6 @@
 					inputDisplay.innerHTML = 'Store numbers only';
 				}
 				if(!isNaN(x) && inputDisplay.innerHTML != '0'){ // If the data is a number...
-					console.log('Messay loves me!')
 					memoryData = inputDisplay.innerHTML;
 				}
 				if(inputDisplay.innerHTML == '0'){ // If the data is a number...
@@ -302,7 +301,6 @@
 		///////////////////////////////////////////
 		for (let i = 0; i < operator.length; i++){
 			operator[i].addEventListener('click', function(event){
-				console.log('Operator clicked.')
 				event.preventDefault();
 				for (let i = 0; i < operator.length; i++){
 					operator[i].style.background = '';
@@ -313,7 +311,6 @@
 				firstValue = Number(inputDisplay.innerHTML);
 				clearDisplayBoolean = true;
 				inputDisplayStringLength = 0;
-				console.log('inputDisplayStringLength: ' +inputDisplayStringLength)
 			});
 		};
 
@@ -326,43 +323,85 @@
 				operator[i].style.background = '';
 				operator[i].style.color = '';
 			}
-			clearDisplayBoolean = true;
-			secondValue = Number(inputDisplay.innerHTML);
-			console.log('First value: ' +firstValue);
-			console.log('Operator sign: ' +operatorSign);
-			console.log('Second value: ' +secondValue);
-
-			switch (operatorSign){
-				case '/':
-				equalsValue = ((firstValue * 10) / (secondValue * 10));
-				finalResult = equalsValue.toString();
-				validateMyReturn()
-				secondValue = 0;
-				break;
-
-				case 'x':
-				equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
-				finalResult = equalsValue.toString();
-				validateMyReturn()
-				secondValue = 0;
-				break;
-
-				case '-':
-				equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-				finalResult = equalsValue.toString();
-				validateMyReturn()
-				secondValue = 0;
-				break;
-
-				case '+':
-				equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-				finalResult = equalsValue.toString();
-				validateMyReturn()
-				secondValue = 0;
-			}
-			if(isNaN(finalResult)){ // If the final result is Not a Number...
-				inputDisplay.innerHTML = 'Nothing to compute';
+			if(!secondValue) { // This determines that it's a new calculation
+				console.log('First running')
+				secondValue = Number(inputDisplay.innerHTML);
 				clearDisplayBoolean = true;
+				console.log('First value: ' +firstValue);
+				console.log('Operator sign: ' +operatorSign);
+				console.log('Second value: ' +secondValue);
+
+				switch (operatorSign){
+
+					case '/':
+					equalsValue = ((firstValue * 10) / (secondValue * 10));
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case 'x':
+					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case '-':
+					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case '+':
+					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+				}
+				if(isNaN(finalResult)){ // If the final result is Not a Number...
+					inputDisplay.innerHTML = 'Nothing to compute';
+				}
+			} else { // This determines that the user is just pressing enter without entering new values
+				console.log('Second running')
+				clearDisplayBoolean = true;
+				console.log('First value: ' +firstValue);
+				console.log('Operator sign: ' +operatorSign);
+				console.log('Second value: ' +secondValue);
+
+				switch (operatorSign){
+
+					case '/':
+					equalsValue = ((firstValue * 10) / (secondValue * 10));
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case 'x':
+					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case '-':
+					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+					break;
+
+					case '+':
+					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
+					finalResult = equalsValue.toString();
+					validateMyReturn();
+					firstValue = finalResult;
+				}
+				if(isNaN(finalResult)){ // If the final result is Not a Number...
+					inputDisplay.innerHTML = 'Nothing to compute';
+				}
 			}
 		});
 
@@ -375,36 +414,33 @@
 			console.log('Final Result length: ' +finalResult.length);
 			if(finalResult.indexOf('e') != -1 && finalResult.length > 12) {
 				if(finalResult.indexOf('-') != -1){
-					console.log('I guess someone is trying an intricate operation.');
 					let lastTwo = Number(finalResult.substr(finalResult.length - 2));
-					inputDisplay.innerHTML = Math.round(Number(finalResult.slice(0, 4)))+ 'e-' + lastTwo;
+					if(lastTwo.toString().indexOf('-') != -1) {
+						inputDisplay.innerHTML = Math.round(Number(finalResult.slice(0, 4)))+ 'e' + lastTwo.toString();
+					} else {
+						inputDisplay.innerHTML = Math.round(Number(finalResult.slice(0, 4)))+ 'e-' + lastTwo;
+					}
+					
 				} else {
 					let eIndex = finalResult.indexOf('e');
-					console.log('eIndex: ' +eIndex);
 					inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
 				}
 			}
 			if(finalResult.indexOf('e') === -1 && finalResult.length > 12){
 				let differenceInNumberOfDigits = finalResult.length - 12; // 12 is the maximum number of characters we want to display for visiual purposes.
-				console.log('finalResult.indexOf(e): ' +finalResult.indexOf('e'))
-				console.log('differenceInNumberOfDigits: ' +differenceInNumberOfDigits);
 				let slicedFinalResult = finalResult.slice(0, 3);
-				console.log('slicedFinalResult: ' +slicedFinalResult);
 				inputDisplay.innerHTML = (slicedFinalResult / 100) + 'e' +(differenceInNumberOfDigits + (9 + 2)).toString(); // The 2 extra exponent values are because we are moving the decimal point on slicedFinalResult by 2 places.
 			}
 			if(finalResult.indexOf('.') != -1 && finalResult.indexOf('e') === -1 && finalResult.length > 12){
-				console.log('I guess it is just a fraction.')
 				inputDisplay.innerHTML = finalResult.slice(0, 12);
 			}
 			if(finalResult.indexOf('e') != -1 && finalResult.length <= 12){
 				if(finalResult.indexOf('+') != -1){
-					console.log('I guess someone entered a lot of zeros in a row.')
 					let plusIndex = finalResult.indexOf('+');
 					inputDisplay.innerHTML = finalResult.slice(0, plusIndex) + finalResult[plusIndex + 1] + finalResult[plusIndex + 2];
 				}
 			}
 			if(finalResult.indexOf('e') === -1 && finalResult.length <= 12){
-				console.log('I guess it is just a simple number less than or equal to 12 digits long.')
 				inputDisplay.innerHTML = finalResult.slice(0, 12);
 			}
 			console.log('Final Result: ' +finalResult+ '\n\r');
