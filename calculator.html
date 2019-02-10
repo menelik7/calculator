@@ -259,10 +259,10 @@
 			event.preventDefault();
 			clearDisplayBoolean = true;
 			let x = parseInt(inputDisplay.innerHTML);
-			if(isNaN(x) && memoryData){ // If the data is not a number...
-				inputDisplay.innerHTML = 'Store numbers only';
-			}
 			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
+				if(isNaN(x)){ // If the data is not a number...
+					inputDisplay.innerHTML = 'Store numbers only';
+				}
 				if(!isNaN(x) && inputDisplay.innerHTML != '0'){ // If the data is a number...
 					memoryData = inputDisplay.innerHTML;
 				}
@@ -270,14 +270,14 @@
 					inputDisplay.innerHTML = 'Store numbers &#8800; 0';
 				}
 			}
+			if(isNaN(x) && memoryData){ // If the data is not a number...
+				inputDisplay.innerHTML = 'Store numbers only';
+			}
 			if(inputDisplay.innerHTML == '0' && memoryData){ // If the data is a number...
 				inputDisplay.innerHTML = 'Store numbers &#8800; 0';
 			}
 			if(inputDisplay.innerHTML != '' && memoryData){ // ****** There is IS_data displayed and there IS_memory stored. ******
 				memoryData = inputDisplay.innerHTML;
-			}
-			if((inputDisplay.innerHTML == '' && !memoryData) || (inputDisplay.innerHTML == '' && memoryData)){ // ****** There is NO_data displayed and there is NO_memory stored OR  There is NO_data displayed and there is IS_memory stored******
-				inputDisplay.innerHTML = 'Nothing to store'
 			}
 			inputDisplayStringLength = 0;
 		});
