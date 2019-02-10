@@ -17,7 +17,8 @@
 
     <style>
     	h1 {
-    		margin: 50px;
+    		margin: 50px 0;
+    		text-align: center;
     	}
     	div {
     		margin-left: 10px;
@@ -74,38 +75,38 @@
 
 		.animate1 {
 			-webkit-animation-name: exampleOne; /* Safari 4.0 - 8.0 */
-			-webkit-animation-duration:3.2s; /* Safari 4.0 - 8.0 */
-			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
-			animation-duration: 3.2s;
-			animation-delay: -2s;
+			-webkit-animation-duration:2.2s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+			animation-duration: 2.2s;
+			animation-delay: -1s;
 		}
 		.animate2 {
 			-webkit-animation-name: exampleTwo; /* Safari 4.0 - 8.0 */
-			-webkit-animation-duration: 3.4s; /* Safari 4.0 - 8.0 */
-			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
-			animation-duration: 3.4s;
-			animation-delay: -2s;
+			-webkit-animation-duration: 2.4s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: .9s; /* Safari 4.0 - 8.0 */
+			animation-duration: 2.4s;
+			animation-delay: -.9s;
 		}
 		.animate3 {
 			-webkit-animation-name: exampleThree; /* Safari 4.0 - 8.0 */
-			-webkit-animation-duration: 3.6s; /* Safari 4.0 - 8.0 */
-			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
-			animation-duration: 3.6s;
-			animation-delay: -2s;
+			-webkit-animation-duration: 2.6s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: .8s; /* Safari 4.0 - 8.0 */
+			animation-duration: 2.6s;
+			animation-delay: -.8s;
 		}
 		.animate4 {
 			-webkit-animation-name: exampleFour; /* Safari 4.0 - 8.0 */
-			-webkit-animation-duration: 3.8s; /* Safari 4.0 - 8.0 */
-			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
-			animation-duration: 3.8s;
-			animation-delay: -2s;
+			-webkit-animation-duration: 2.8s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: .7s; /* Safari 4.0 - 8.0 */
+			animation-duration: 2.8s;
+			animation-delay: -.7s;
 		}
 		.animate5 {
 			-webkit-animation-name: exampleFive; /* Safari 4.0 - 8.0 */
-			-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
-			animation-duration: 4s;
-			animation-delay: -2s;
+			-webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: .6s; /* Safari 4.0 - 8.0 */
+			animation-duration: 3s;
+			animation-delay: -.6s;
 		}
 
 		/* Safari 4.0 - 8.0 */
@@ -173,19 +174,19 @@
 
 <body>
 	<div class="container">
-		<h1 class="col-6 offset-3">Reverse String Algorithm</h1>
-		<div class="col-6 offset-3">
+		<h1 class="col-12">Reverse String Algorithm</h1>
+		<div class="col-12">
 			<span>Original String: </span><h3><span id="one">H</span><span id="two">E</span><span id="three">L</span><span id="four">L</span><span id="five">O</span></h3>
 			<span>Reversed String: </span><h3><span id="display-one"></span><span id="display-two"></span><span id="display-three"></span><span id="display-four"></span><span id="display-five"></span></h3>
 			<button type="submit" class="btn btn-success" onclick="showResult()">Reverse my string</button>
 		</div>
 		
-		<div class="col-6 offset-3 d-none" id="validate">
+		<div class="col-12 d-none" id="validate">
 			<h3 style="margin: 0;">You must enter a string prior to submitting form</h3>
 			<button type="submit" class="btn btn-danger" onclick="okay()">Okay</button>
 		</div>
 
-		<div class="col-6 offset-3" id="is-valid">
+		<div class="col-12" id="is-valid">
 			<form>
 				<input type="text" class="form-control" id="input-box" placeholder="type your new string">
 				<button type="submit" class="btn btn-primary" onclick="generateNewString()">Generate a new string</button>
