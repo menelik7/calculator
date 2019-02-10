@@ -373,8 +373,8 @@
 			if(!firstValue && clearDisplayBoolean == true){
 				firstValue = inputDisplay.innerHTML;
 			}
-			if(!firstValue && operatorSign == '-' && secondValue == '0'){
-				inputDisplay.innerHTML = '-' + inputDisplay.innerHTML;
+			if(!firstValue == '0'){
+				secondValue = inputDisplay.innerHTML;
 			}
 			if(firstValue) { // This determines that it's a valid calculation
 				if(!secondValue){
