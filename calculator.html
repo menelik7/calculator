@@ -340,28 +340,24 @@
 					equalsValue = ((firstValue * 10) / (secondValue * 10));
 					finalResult = equalsValue.toString();
 					validateMyReturn();
-					firstValue = finalResult;
 					break;
 
 					case 'x':
 					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
 					finalResult = equalsValue.toString();
 					validateMyReturn();
-					firstValue = finalResult;
 					break;
 
 					case '-':
 					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
 					finalResult = equalsValue.toString();
 					validateMyReturn();
-					firstValue = finalResult;
 					break;
 
 					case '+':
 					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
 					finalResult = equalsValue.toString();
 					validateMyReturn();
-					firstValue = finalResult;
 				}
 				if(isNaN(finalResult)){ // If the final result is Not a Number...
 					inputDisplay.innerHTML = 'Nothing to compute';
@@ -408,6 +404,7 @@
 			}
 			console.log('Final Result: ' +finalResult+ '\n\r');
 			inputDisplayStringLength = 0;
+			firstValue = finalResult;
 		}
 
 	</script>
