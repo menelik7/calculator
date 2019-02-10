@@ -326,7 +326,9 @@
 				operator[i].style.color = '';
 			}
 			if(firstValue) { // This determines that it's a valid calculation
-				secondValue = Number(inputDisplay.innerHTML);
+				if(!secondValue){
+				 secondValue = Number(inputDisplay.innerHTML);
+				}
 				clearDisplayBoolean = true;
 				console.log('First value: ' +firstValue);
 				console.log('Operator sign: ' +operatorSign);
@@ -401,7 +403,6 @@
 			console.log('Final Result: ' +finalResult+ '\n\r');
 			inputDisplayStringLength = 0;
 			firstValue = finalResult;
-			secondValue = 0;
 		}
 
 	</script>
