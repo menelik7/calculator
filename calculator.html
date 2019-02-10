@@ -233,13 +233,13 @@
 					let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
 					inputDisplay.innerHTML = newValue;
 				}
-				if((firstValue && clearDisplayBoolean == true) || (!firstValue && !secondValue)){
+				if(firstValue && clearDisplayBoolean == true){
 					for (let i = 0; i < operator.length; i++){
 						operator[i].style.background = '';
 						operator[i].style.color = '';
 					}
 					operatorSign = '';
-					secondValue = '';
+				
 					clearDisplayBoolean = false;
 					let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
 					inputDisplay.innerHTML = newValue;
