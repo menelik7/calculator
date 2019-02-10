@@ -223,32 +223,35 @@
 		/////////////////////////////////////////////////
 		backspace.addEventListener('click', function(event){
 			event.preventDefault();
+			let currentValue = inputDisplay.innerHTML;
+			let indexOfValueToBeDeleted;
+			for (let i = 0; i < currentValue.length; i++){ 
+				indexOfValueToBeDeleted = i; // valueToBeDeleted = currentValue[i];
+			}
 			if(inputDisplayStringLength > 0 && inputDisplay.innerHTML != '0') { // Make sure user doesn't delete original value of "0" at the beginning of the calculation.
-				let currentValue = inputDisplay.innerHTML;
-				let indexOfValueToBeDeleted;
-				for (let i = 0; i < currentValue.length; i++){ 
-					indexOfValueToBeDeleted = i; // valueToBeDeleted = currentValue[i];
-				}
+				
+				
 				if(clearDisplayBoolean == false){
 					let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
 					inputDisplay.innerHTML = newValue;
 				}
-				if(firstValue && clearDisplayBoolean == true){
-					for (let i = 0; i < operator.length; i++){
-						operator[i].style.background = '';
-						operator[i].style.color = '';
-					}
-					operatorSign = '';
 				
-					clearDisplayBoolean = false;
-					let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
-					inputDisplay.innerHTML = newValue;
+				inputDisplayStringLength -= 1;	
+			}
+			if(firstValue && clearDisplayBoolean == true){
+				for (let i = 0; i < operator.length; i++){
+					operator[i].style.background = '';
+					operator[i].style.color = '';
 				}
-				if(inputDisplay.innerHTML == ''){ // If the user enters a number replacing our original value of "0" and then backspaces to delete his/her entry, set the display value back to "0".
-					inputDisplay.innerHTML = '0';
-				}
-				inputDisplayStringLength -= 1;
-				
+				operatorSign = '';
+			
+				clearDisplayBoolean = false;
+				let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
+				inputDisplay.innerHTML = newValue;
+				console.log('inputDisplayStringLength: '+inputDisplayStringLength)
+			}
+			if(inputDisplay.innerHTML == ''){ // If the user enters a number replacing our original value of "0" and then backspaces to delete his/her entry, set the display value back to "0".
+				inputDisplay.innerHTML = '0';
 			}
 		})
 
@@ -310,6 +313,9 @@
 		////////////////////////////////////////////////////////////////////////////
 		for (let i = 0; i < operator.length; i++){
 			operator[i].addEventListener('click', function(event){
+				console.log('First value: ' +firstValue);
+					console.log('Operator sign: ' +operatorSign);
+					console.log('Second value: ' +secondValue);
 				event.preventDefault();
 				for (let i = 0; i < operator.length; i++){
 					operator[i].style.background = '';
@@ -334,6 +340,7 @@
 					operatorSignSwitch();
 					operatorSign = this.innerHTML;
 					secondValue = '';
+					firstValue = finalResult;
 					console.log('clearDisplayBoolean: ' +clearDisplayBoolean);
 				}
 				if(firstValue && clearDisplayBoolean == true) { // First value exists and the operator has already been engaged but the user chooses a different operator prior to entering secondValue
@@ -356,7 +363,7 @@
 				secondValue = inputDisplay.innerHTML;
 			}
 			if(!firstValue && clearDisplayBoolean == true){
-				firstValue = inputDisplay.innerHTML;
+				firstValue = finalResult;
 			}
 		
 			if(firstValue) { // This determines that it's a valid calculation
