@@ -325,10 +325,8 @@
 				operator[i].style.background = '';
 				operator[i].style.color = '';
 			}
-			if(!secondValue) { // This determines that it's a new calculation
-				console.log('First running')
+			if(firstValue) { // This determines that it's a valid calculation
 				secondValue = Number(inputDisplay.innerHTML);
-			}
 				clearDisplayBoolean = true;
 				console.log('First value: ' +firstValue);
 				console.log('Operator sign: ' +operatorSign);
@@ -359,9 +357,7 @@
 					finalResult = equalsValue.toString();
 					validateMyReturn();
 				}
-				if(isNaN(finalResult)){ // If the final result is Not a Number...
-					inputDisplay.innerHTML = 'Nothing to compute';
-				}
+			}
 		});
 
 		  //////////////////////////////////////////
@@ -371,6 +367,9 @@
 		// Function that checks the returned value and manupilates it to render an easily understandable display.
 		function validateMyReturn() {
 			console.log('Final Result length: ' +finalResult.length);
+			if(isNaN(finalResult)){ // If the final result is Not a Number...
+				inputDisplay.innerHTML = 'Nothing to compute';
+			}
 			if(finalResult.indexOf('e') != -1 && finalResult.length > 16) {
 				if(finalResult.indexOf('-') != -1){
 					let lastTwo = Number(finalResult.substr(finalResult.length - 2));
