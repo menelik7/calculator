@@ -324,27 +324,7 @@
 					console.log('Operator sign: ' +operatorSign);
 					console.log('Second value: ' +secondValue);
 
-					switch (operatorSign){
-
-						case '/':
-						equalsValue = ((firstValue * 10) / (secondValue * 10));
-						validateMyReturn();
-						break;
-
-						case 'x':
-						equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
-						validateMyReturn();
-						break;
-
-						case '-':
-						equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-						validateMyReturn();
-						break;
-
-						case '+':
-						equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-						validateMyReturn();
-					}
+					
 					operatorSign = this.innerHTML;
 					console.log('clearDisplayBoolean: ' +clearDisplayBoolean);
 				}
@@ -386,27 +366,7 @@
 				console.log('Operator sign: ' +operatorSign);
 				console.log('Second value: ' +secondValue);
 
-				switch (operatorSign){
-
-					case '/':
-					equalsValue = ((firstValue * 10) / (secondValue * 10));
-					validateMyReturn();
-					break;
-
-					case 'x':
-					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
-					validateMyReturn();
-					break;
-
-					case '-':
-					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-					validateMyReturn();
-					break;
-
-					case '+':
-					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-					validateMyReturn();
-				}
+				
 			}
 		});
 
@@ -414,6 +374,29 @@
 		 /////////////// Functions ////////////////
 		//////////////////////////////////////////
 
+		function operatorSignSwitch(){ // Compute the numbers
+			switch (operatorSign){
+
+						case '/':
+						equalsValue = ((firstValue * 10) / (secondValue * 10));
+						validateMyReturn();
+						break;
+
+						case 'x':
+						equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
+						validateMyReturn();
+						break;
+
+						case '-':
+						equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
+						validateMyReturn();
+						break;
+
+						case '+':
+						equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
+						validateMyReturn();
+					}
+		}
 		// Function that checks the returned value and manupilates it to render an easily understandable display.
 		function validateMyReturn() {
 			finalResult = equalsValue.toString();
