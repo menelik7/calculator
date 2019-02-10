@@ -59,7 +59,7 @@
 		}
 
 		#input-display {
-			padding: 0 85px;
+			padding: 0 85px 0 10px;
 			margin-bottom: 5px;
 			height: 95px;
 			font-size:35px;
@@ -170,7 +170,7 @@
 			numbersKey[i].addEventListener('click', function(event){
 				event.preventDefault();
 				let inputValue = numbersKey[i].innerHTML;
-				if(inputDisplayStringLength < 12){
+				if(inputDisplayStringLength < 16){
 					if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0'){
 						inputDisplay.append(inputValue);
 					} else {
@@ -194,7 +194,7 @@
 				inputDisplay.innerHTML = dotEntry;
 				clearDisplayBoolean = false;
 			}
-			if(inputDisplay.innerHTML != '' && inputDisplay.innerHTML.indexOf('.') === -1 && inputDisplayStringLength < 12){ // There IS_data displayed and there is NO_decimal point - WE APPEND OUR DECIMAL POINT TO THE DISPLAY.
+			if(inputDisplay.innerHTML != '' && inputDisplay.innerHTML.indexOf('.') === -1 && inputDisplayStringLength < 16){ // There IS_data displayed and there is NO_decimal point - WE APPEND OUR DECIMAL POINT TO THE DISPLAY.
 				inputDisplay.append(dotEntry);
 				inputDisplayStringLength += 1;
 			}
@@ -375,7 +375,7 @@
 		// Function that checks the returned value and manupilates it to render an easily understandable display.
 		function validateMyReturn() {
 			console.log('Final Result length: ' +finalResult.length);
-			if(finalResult.indexOf('e') != -1 && finalResult.length > 12) {
+			if(finalResult.indexOf('e') != -1 && finalResult.length > 16) {
 				if(finalResult.indexOf('-') != -1){
 					let lastTwo = Number(finalResult.substr(finalResult.length - 2));
 					if(lastTwo.toString().indexOf('-') != -1) {
@@ -389,22 +389,22 @@
 					inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
 				}
 			}
-			if(finalResult.indexOf('e') === -1 && finalResult.length > 12){
-				let differenceInNumberOfDigits = finalResult.length - 12; // 12 is the maximum number of characters we want to display for visiual purposes.
+			if(finalResult.indexOf('e') === -1 && finalResult.length > 16){
+				let differenceInNumberOfDigits = finalResult.length - 16; // 16 is the maximum number of characters we want to display for visiual purposes.
 				let slicedFinalResult = finalResult.slice(0, 3);
-				inputDisplay.innerHTML = (slicedFinalResult / 100) + 'e' +(differenceInNumberOfDigits + (9 + 2)).toString(); // The 2 extra exponent values are because we are moving the decimal point on slicedFinalResult by 2 places.
+				inputDisplay.innerHTML = (slicedFinalResult / 100) + 'e' +(differenceInNumberOfDigits + (13 + 2)).toString(); // The 2 extra exponent values are because we are moving the decimal point on slicedFinalResult by 2 places.
 			}
-			if(finalResult.indexOf('.') != -1 && finalResult.indexOf('e') === -1 && finalResult.length > 12){
-				inputDisplay.innerHTML = finalResult.slice(0, 12);
+			if(finalResult.indexOf('.') != -1 && finalResult.indexOf('e') === -1 && finalResult.length > 16){
+				inputDisplay.innerHTML = finalResult.slice(0, 16);
 			}
-			if(finalResult.indexOf('e') != -1 && finalResult.length <= 12){
+			if(finalResult.indexOf('e') != -1 && finalResult.length <= 16){
 				if(finalResult.indexOf('+') != -1){
 					let plusIndex = finalResult.indexOf('+');
 					inputDisplay.innerHTML = finalResult.slice(0, plusIndex) + finalResult[plusIndex + 1] + finalResult[plusIndex + 2];
 				}
 			}
-			if(finalResult.indexOf('e') === -1 && finalResult.length <= 12){
-				inputDisplay.innerHTML = finalResult.slice(0, 12);
+			if(finalResult.indexOf('e') === -1 && finalResult.length <= 16){
+				inputDisplay.innerHTML = finalResult.slice(0, 16);
 			}
 			console.log('Final Result: ' +finalResult+ '\n\r');
 			inputDisplayStringLength = 0;
