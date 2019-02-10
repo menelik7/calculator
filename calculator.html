@@ -330,7 +330,7 @@
 				if(firstValue && clearDisplayBoolean == true) { // First value exists and the operator has already been engaged but the user chooses a different operator prior to entering secondValue
 					operatorSign = this.innerHTML;
 				}
-				if(!firstValue){ // Either firstValue has not yet been determined or a caluculation has just been completed
+				if(!firstValue || inputDisplay == '0'){ // Either firstValue has not yet been determined or a caluculation has just been completed
 					operatorSign = this.innerHTML;
 					firstValue = Number(inputDisplay.innerHTML);
 					clearDisplayBoolean = true;
