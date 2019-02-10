@@ -332,7 +332,7 @@
 				}
 				if(!firstValue || inputDisplay == '0'){ // Either firstValue has not yet been determined or a caluculation has just been completed
 					operatorSign = this.innerHTML;
-					firstValue = Number(inputDisplay.innerHTML);
+					firstValue = inputDisplay.innerHTML;
 					clearDisplayBoolean = true;
 					inputDisplayStringLength = 0;
 				}
@@ -353,7 +353,7 @@
 				secondValue = inputDisplay.innerHTML;
 			}
 			if(!firstValue && clearDisplayBoolean == true){
-				firstValue = Number(inputDisplay.innerHTML);
+				firstValue = inputDisplay.innerHTML;
 			}
 		
 			if(firstValue) { // This determines that it's a valid calculation
