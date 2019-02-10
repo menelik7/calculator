@@ -223,7 +223,7 @@
 		/////////////////////////////////////////////////
 		backspace.addEventListener('click', function(event){
 			event.preventDefault();
-			if(inputDisplayStringLength > 0) {
+			if(inputDisplayStringLength > 0 && inputDisplay.innerHTML != '0') {
 			 let currentValue = inputDisplay.innerHTML;
 			 let indexOfValueToBeDeleted;
 			 for (let i = 0; i < currentValue.length; i++){
