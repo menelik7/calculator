@@ -336,25 +336,21 @@
 
 					case '/':
 					equalsValue = ((firstValue * 10) / (secondValue * 10));
-					finalResult = equalsValue.toString();
 					validateMyReturn();
 					break;
 
 					case 'x':
 					equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
-					finalResult = equalsValue.toString();
 					validateMyReturn();
 					break;
 
 					case '-':
 					equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-					finalResult = equalsValue.toString();
 					validateMyReturn();
 					break;
 
 					case '+':
 					equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-					finalResult = equalsValue.toString();
 					validateMyReturn();
 				}
 			}
@@ -366,6 +362,7 @@
 
 		// Function that checks the returned value and manupilates it to render an easily understandable display.
 		function validateMyReturn() {
+			finalResult = equalsValue.toString();
 			console.log('Final Result length: ' +finalResult.length);
 			if(isNaN(finalResult)){ // If the final result is Not a Number...
 				inputDisplay.innerHTML = 'Nothing to compute';
