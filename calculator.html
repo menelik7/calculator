@@ -223,11 +223,11 @@
 		/////////////////////////////////////////////////
 		backspace.addEventListener('click', function(event){
 			event.preventDefault();
-			if(inputDisplayStringLength > 0 && inputDisplay.innerHTML != '0') {
+			if(inputDisplayStringLength > 0 && inputDisplay.innerHTML != '0') { // Make sure user doesn't delete original value of "0" at the beginning of the calculation.
 				let currentValue = inputDisplay.innerHTML;
 				let indexOfValueToBeDeleted;
-				for (let i = 0; i < currentValue.length; i++){ // valueToBeDeleted = currentValue[i];
-					indexOfValueToBeDeleted = i;
+				for (let i = 0; i < currentValue.length; i++){ 
+					indexOfValueToBeDeleted = i; // valueToBeDeleted = currentValue[i];
 				}
 				if(clearDisplayBoolean == false){
 					let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
@@ -244,7 +244,7 @@
 					let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
 					inputDisplay.innerHTML = newValue;
 				}
-				if(inputDisplay.innerHTML == ''){
+				if(inputDisplay.innerHTML == ''){ // If the user enters a number replacing our original value of "0" and then backspaces to delete his/her entry, set the display value back to "0".
 					inputDisplay.innerHTML = '0';
 				}
 				inputDisplayStringLength -= 1;
@@ -312,10 +312,45 @@
 					operator[i].style.color = '';
 				}
 				this.setAttribute('style', '-moz-transition: background .3s ease-in; -o-transition: background .3s ease-in; -webkit-transition: background .3s ease-in; transition: background .3s ease-in; background: #03bf23; -moz-transition: color .2s ease-in; -o-transition: color .2s ease-in; -webkit-transition: color .2s ease-in; transition: color .2s ease-in; color: #fff;');
-				operatorSign = this.innerHTML;
-				firstValue = Number(inputDisplay.innerHTML);
-				clearDisplayBoolean = true;
-				inputDisplayStringLength = 0;
+				if(firstValue) { // This determines that it's a valid calculation
+					if(!secondValue){
+					 secondValue = Number(inputDisplay.innerHTML);
+					}
+					clearDisplayBoolean = true;
+					console.log('First value: ' +firstValue);
+					console.log('Operator sign: ' +operatorSign);
+					console.log('Second value: ' +secondValue);
+
+					switch (operatorSign){
+
+						case '/':
+						equalsValue = ((firstValue * 10) / (secondValue * 10));
+						validateMyReturn();
+						break;
+
+						case 'x':
+						equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
+						validateMyReturn();
+						break;
+
+						case '-':
+						equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
+						validateMyReturn();
+						break;
+
+						case '+':
+						equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
+						validateMyReturn();
+					}
+					operatorSign = this.innerHTML;
+					console.log('clearDisplayBoolean: ' +clearDisplayBoolean);
+				}
+				if(!firstValue){
+					operatorSign = this.innerHTML;
+					firstValue = Number(inputDisplay.innerHTML);
+					clearDisplayBoolean = true;
+					inputDisplayStringLength = 0;
+				}
 			});
 		};
 
@@ -328,9 +363,19 @@
 				operator[i].style.background = '';
 				operator[i].style.color = '';
 			}
+			if(firstValue && secondValue && clearDisplayBoolean == true){
+				firstValue = inputDisplay.innerHTML;
+				secondValue = inputDisplay.innerHTML;
+			}
+			if(!firstValue && clearDisplayBoolean == true){
+				firstValue = inputDisplay.innerHTML;
+			}
+			if(!firstValue && operatorSign == '-' && secondValue == '0'){
+				inputDisplay.innerHTML = '-' + inputDisplay.innerHTML;
+			}
 			if(firstValue) { // This determines that it's a valid calculation
 				if(!secondValue){
-				 secondValue = Number(inputDisplay.innerHTML);
+				 secondValue = inputDisplay.innerHTML;
 				}
 				clearDisplayBoolean = true;
 				console.log('First value: ' +firstValue);
@@ -405,7 +450,7 @@
 			}
 			console.log('Final Result: ' +finalResult+ '\n\r');
 			inputDisplayStringLength = 0;
-			firstValue = finalResult;
+			firstValue = '';
 		}
 
 	</script>
