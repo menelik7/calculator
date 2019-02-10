@@ -258,11 +258,11 @@
 		memorize.addEventListener('click', function(event){
 			event.preventDefault();
 			clearDisplayBoolean = true;
+			let x = parseInt(inputDisplay.innerHTML);
+			if(isNaN(x)){ // If the data is not a number...
+				inputDisplay.innerHTML = 'Store numbers only';
+			}
 			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
-				let x = parseInt(inputDisplay.innerHTML);
-				if(isNaN(x)){ // If the data is not a number...
-					inputDisplay.innerHTML = 'Store numbers only';
-				}
 				if(!isNaN(x) && inputDisplay.innerHTML != '0'){ // If the data is a number...
 					memoryData = inputDisplay.innerHTML;
 				}
