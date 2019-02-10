@@ -223,29 +223,29 @@
 		/////////////////////////////////////////////////
 		backspace.addEventListener('click', function(event){
 			event.preventDefault();
-			let currentValue = inputDisplay.innerHTML;
-			let indexOfValueToBeDeleted;
-			for (let i = 0; i < currentValue.length; i++){
-				// valueToBeDeleted = currentValue[i];
-				indexOfValueToBeDeleted = i;
-			}
-			if(clearDisplayBoolean == false){
-				let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
-				inputDisplay.innerHTML = newValue;
-			}
-			if((firstValue && clearDisplayBoolean == true) || (!firstValue && clearDisplayBoolean == false) || (!firstValue && !secondValue)){
-				for (let i = 0; i < operator.length; i++){
-					operator[i].style.background = '';
-					operator[i].style.color = '';
-				}
-				operatorSign = '';
-				secondValue = '';
-				clearDisplayBoolean = false;
-				let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
-				inputDisplay.innerHTML = newValue;
-			}
 			if(inputDisplayStringLength > 0) {
-				inputDisplayStringLength -= 1;
+			 let currentValue = inputDisplay.innerHTML;
+			 let indexOfValueToBeDeleted;
+			 for (let i = 0; i < currentValue.length; i++){
+				// valueToBeDeleted = currentValue[i];
+				 indexOfValueToBeDeleted = i;
+			  }
+			 if(clearDisplayBoolean == false){
+				 let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
+				 inputDisplay.innerHTML = newValue;
+			 }
+			 if((firstValue && clearDisplayBoolean == true) || (!firstValue && clearDisplayBoolean == false) || (!firstValue && !secondValue)){
+				 for (let i = 0; i < operator.length; i++){
+					 operator[i].style.background = '';
+					 operator[i].style.color = '';
+				 }
+				 operatorSign = '';
+				 secondValue = '';
+				 clearDisplayBoolean = false;
+				 let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
+				 inputDisplay.innerHTML = newValue;
+			 }
+			 inputDisplayStringLength -= 1;
 			}
 		})
 
