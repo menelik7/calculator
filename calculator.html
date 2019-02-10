@@ -259,7 +259,7 @@
 			event.preventDefault();
 			clearDisplayBoolean = true;
 			let x = parseInt(inputDisplay.innerHTML);
-			if(isNaN(x)){ // If the data is not a number...
+			if(isNaN(x) && memoryData){ // If the data is not a number...
 				inputDisplay.innerHTML = 'Store numbers only';
 			}
 			if(inputDisplay.innerHTML != '' && !memoryData){ // ****** There IS_data displayed but NO_memory stored. ******
