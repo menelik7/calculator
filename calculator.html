@@ -316,6 +316,13 @@
 					operator[i].style.color = '';
 				}
 				this.setAttribute('style', '-moz-transition: background .3s ease-in; -o-transition: background .3s ease-in; -webkit-transition: background .3s ease-in; transition: background .3s ease-in; background: #03bf23; -moz-transition: color .2s ease-in; -o-transition: color .2s ease-in; -webkit-transition: color .2s ease-in; transition: color .2s ease-in; color: #fff;');
+				if(!firstValue){ // Either firstValue has not yet been determined or a caluculation has just been completed
+					operatorSign = this.innerHTML;
+					firstValue = inputDisplay.innerHTML;
+					secondValue = '';
+					clearDisplayBoolean = true;
+					inputDisplayStringLength = 0;
+				}
 				if(firstValue && clearDisplayBoolean == false) { // This determines that it's a valid calculation
 					if(!secondValue){
 					 secondValue = Number(inputDisplay.innerHTML);
@@ -331,13 +338,6 @@
 				}
 				if(firstValue && clearDisplayBoolean == true) { // First value exists and the operator has already been engaged but the user chooses a different operator prior to entering secondValue
 					operatorSign = this.innerHTML;
-				}
-				if(!firstValue){ // Either firstValue has not yet been determined or a caluculation has just been completed
-					operatorSign = this.innerHTML;
-					firstValue = inputDisplay.innerHTML;
-					secondValue = '';
-					clearDisplayBoolean = true;
-					inputDisplayStringLength = 0;
 				}
 			});
 		};
@@ -402,9 +402,6 @@
 		function validateMyReturn() {
 			finalResult = equalsValue.toString();
 			console.log('Final Result length: ' +finalResult.length);
-			if(isNaN(finalResult)){ // If the final result is Not a Number...
-				inputDisplay.innerHTML = 'Nothing to compute';
-			}
 			if(finalResult.indexOf('e') != -1 && finalResult.length > 16) {
 				if(finalResult.indexOf('-') != -1){
 					let lastTwo = Number(finalResult.substr(finalResult.length - 2));
@@ -435,6 +432,9 @@
 			}
 			if(finalResult.indexOf('e') === -1 && finalResult.length <= 16){
 				inputDisplay.innerHTML = finalResult.slice(0, 16);
+			}
+			if(finalResult == 'NaN'){ // If the final result is Not a Number...
+				inputDisplay.innerHTML = '0';
 			}
 			console.log('Final Result: ' +finalResult+ '\n\r');
 			inputDisplayStringLength = 0;
