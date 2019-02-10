@@ -270,6 +270,9 @@
 					inputDisplay.innerHTML = 'Store numbers &#8800; 0';
 				}
 			}
+			if(inputDisplay.innerHTML == '0' && memoryData){ // If the data is a number...
+				inputDisplay.innerHTML = 'Store numbers &#8800; 0';
+			}
 			if(inputDisplay.innerHTML != '' && memoryData){ // ****** There is IS_data displayed and there IS_memory stored. ******
 				memoryData = inputDisplay.innerHTML;
 			}
