@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Algorithm</title>
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">  
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+
+    <!-- Bootstrap JS Files -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <style>
+    	h1 {
+    		margin: 50px;
+    	}
+    	div {
+    		margin-left: 10px;
+    		margin-bottom: 40px;
+    	}
+		
+		span, h1 {
+			font-weight: bold;
+			color: #d9d9d9;
+		}
+		
+		#one,
+		#two,
+		#three,
+		#four,
+		#five {
+			color: #777777;
+		}
+
+		#display-one,
+		#display-two,
+		#display-three,
+		#display-four,
+		#display-five {
+			color: #28a745;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+    	input{
+    		margin-bottom: 5px;
+    	}
+	
+    	.btn-success,
+    	.btn-danger {
+    		width: 180px;
+    	}
+
+    	.btn-danger {
+    		margin-top: 10px;
+    	}
+		
+		#validate {
+			color: red;
+		}
+
+		#display-one,
+		#display-two,
+		#display-three,
+		#display-four,
+		#display-five {
+			position: relative;
+		}
+
+		.animate1 {
+			-webkit-animation-name: exampleOne; /* Safari 4.0 - 8.0 */
+			-webkit-animation-duration:3.2s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+			animation-duration: 3.2s;
+			animation-delay: -2s;
+		}
+		.animate2 {
+			-webkit-animation-name: exampleTwo; /* Safari 4.0 - 8.0 */
+			-webkit-animation-duration: 3.4s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+			animation-duration: 3.4s;
+			animation-delay: -2s;
+		}
+		.animate3 {
+			-webkit-animation-name: exampleThree; /* Safari 4.0 - 8.0 */
+			-webkit-animation-duration: 3.6s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+			animation-duration: 3.6s;
+			animation-delay: -2s;
+		}
+		.animate4 {
+			-webkit-animation-name: exampleFour; /* Safari 4.0 - 8.0 */
+			-webkit-animation-duration: 3.8s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+			animation-duration: 3.8s;
+			animation-delay: -2s;
+		}
+		.animate5 {
+			-webkit-animation-name: exampleFive; /* Safari 4.0 - 8.0 */
+			-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+			animation-duration: 4s;
+			animation-delay: -2s;
+		}
+
+		/* Safari 4.0 - 8.0 */
+		@-webkit-keyframes exampleOne {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Standard syntax */
+		@keyframes exampleOne {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Safari 4.0 - 8.0 */
+		@-webkit-keyframes exampleTwo {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Standard syntax */
+		@keyframes exampleTwo {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Safari 4.0 - 8.0 */
+		@-webkit-keyframes exampleThree {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Standard syntax */
+		@keyframes exampleThree {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Safari 4.0 - 8.0 */
+		@-webkit-keyframes exampleFour {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Standard syntax */
+		@keyframes exampleFour {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Safari 4.0 - 8.0 */
+		@-webkit-keyframes exampleFive {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+		/* Standard syntax */
+		@keyframes exampleFive {
+			0%   {left:1000px; top:0px;}
+			100% {left:0px; top:0px;}
+		}
+
+    </style>
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="col-6 offset-3">Reverse String Algorithm</h1>
+		<div class="col-6 offset-3">
+			<span>Original String: </span><h3><span id="one">H</span><span id="two">E</span><span id="three">L</span><span id="four">L</span><span id="five">O</span></h3>
+			<span>Reversed String: </span><h3><span id="display-one"></span><span id="display-two"></span><span id="display-three"></span><span id="display-four"></span><span id="display-five"></span></h3>
+			<button type="submit" class="btn btn-success" onclick="showResult()">Reverse my string</button>
+		</div>
+		
+		<div class="col-6 offset-3 d-none" id="validate">
+			<h3 style="margin: 0;">You must enter a string prior to submitting form</h3>
+			<button type="submit" class="btn btn-danger" onclick="okay()">Okay</button>
+		</div>
+
+		<div class="col-6 offset-3" id="is-valid">
+			<form>
+				<input type="text" class="form-control" id="input-box" placeholder="type your new string">
+				<button type="submit" class="btn btn-primary" onclick="generateNewString()">Generate a new string</button>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		// Declare global variables
+		var one = document.getElementById('one');
+		var two = document.getElementById('two');
+		var three = document.getElementById('three');
+		var four = document.getElementById('four');
+		var five = document.getElementById('five');
+		var displayOne = document.getElementById('display-one');
+		var displayTwo = document.getElementById('display-two');
+		var displayThree = document.getElementById('display-three');
+		var displayFour = document.getElementById('display-four');
+		var displayFive = document.getElementById('display-five');
+		var inputBox = document.getElementById('input-box');
+		var validate = document.getElementById('validate');
+		var isValid = document.getElementById('is-valid');
+		var array;
+		var reverse;
+		var join;
+		var newString;
+
+		// Run the showResult function to reverse original string and show it in the display tag.
+		function showResult(){
+			displayOne.innerHTML = five.innerHTML;
+			displayTwo.innerHTML = four.innerHTML;
+			displayThree.innerHTML = three.innerHTML;
+			displayFour.innerHTML = two.innerHTML;
+			displayFive.innerHTML = one.innerHTML;
+
+			displayOne.classList.add('animate1');
+			displayTwo.classList.add('animate2');
+			displayThree.classList.add('animate3');
+			displayFour.classList.add('animate4');
+			displayFive.classList.add('animate5');
+		}
+
+		// Run the generateNewString function to generate a new string.
+		function generateNewString(){
+			event.preventDefault();
+			newString = inputBox.value;
+			console.log(newString);
+			if(newString){
+				one.innerHTML = newString[0];
+				two.innerHTML = newString[1];
+				three.innerHTML = newString[2];
+				four.innerHTML = newString[3];
+				five.innerHTML = newString[4];
+				displayOne.innerHTML = '';
+				displayTwo.innerHTML = '';
+				displayThree.innerHTML = '';
+				displayFour.innerHTML = '';
+				displayFive.innerHTML = '';
+				inputBox.value = '';
+				
+				displayOne.classList.remove('animate1');
+				displayTwo.classList.remove('animate2');
+				displayThree.classList.remove('animate3');
+				displayFour.classList.remove('animate4');
+				displayFive.classList.remove('animate5');
+			} else {
+				validate.classList.remove('d-none');
+				isValid.classList.add('d-none');
+			}
+		}
+
+		function okay(){
+			validate.classList.add('d-none');
+			isValid.classList.remove('d-none')
+		}
+	</script>
+</body>
+</html>
