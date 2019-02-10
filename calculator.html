@@ -244,7 +244,9 @@
 					operator[i].style.color = '';
 				}
 				operatorSign = '';
-			
+				firstValue = '';
+				inputDisplayStringLength = currentValue.length;
+				inputDisplayStringLength -= 1;
 				clearDisplayBoolean = false;
 				let newValue = currentValue.slice(0, indexOfValueToBeDeleted);
 				inputDisplay.innerHTML = newValue;
@@ -277,7 +279,6 @@
 				inputDisplay.innerHTML = 'Store numbers only';
 			}
 			if(inputDisplay.innerHTML == '0' && memoryData){ // If the data is a number...
-				console.log('It works!!!')
 				inputDisplay.innerHTML = 'Store numbers &#8800; 0';
 			}
 			if(inputDisplay.innerHTML > 0 && memoryData){ // ****** There is IS_data displayed and there IS_memory stored. ******
@@ -291,7 +292,6 @@
 		/////////////////////////////
 		displayMemory.addEventListener('click', function(event){
 			event.preventDefault();
-			clearDisplayBoolean = true;
 			if(inputDisplay.innerHTML == '' && memoryData){ // ****** There is NO_data displayed and there IS_memory stored. ******
 				inputDisplay.innerHTML = memoryData;
 			}
@@ -306,6 +306,7 @@
 				inputDisplay.innerHTML = "Nothing stored yet"
 			}
 			inputDisplayStringLength = 0;
+			clearDisplayBoolean = false;
 		});
 
 		  ////////////////////////////////////////////////////////////////////////////
@@ -313,9 +314,6 @@
 		////////////////////////////////////////////////////////////////////////////
 		for (let i = 0; i < operator.length; i++){
 			operator[i].addEventListener('click', function(event){
-				console.log('First value: ' +firstValue);
-					console.log('Operator sign: ' +operatorSign);
-					console.log('Second value: ' +secondValue);
 				event.preventDefault();
 				for (let i = 0; i < operator.length; i++){
 					operator[i].style.background = '';
@@ -339,9 +337,11 @@
 					console.log('Second value: ' +secondValue);
 					operatorSignSwitch();
 					operatorSign = this.innerHTML;
-					secondValue = '';
 					firstValue = finalResult;
 					console.log('clearDisplayBoolean: ' +clearDisplayBoolean);
+					console.log('First value: ' +firstValue);
+				console.log('Operator sign: ' +operatorSign);
+				console.log('Second value: ' +secondValue);
 				}
 				if(firstValue && clearDisplayBoolean == true) { // First value exists and the operator has already been engaged but the user chooses a different operator prior to entering secondValue
 					operatorSign = this.innerHTML;
