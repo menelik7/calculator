@@ -171,7 +171,7 @@
 				event.preventDefault();
 				let inputValue = numbersKey[i].innerHTML;
 				if(inputDisplayStringLength < 16){
-					if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0'){
+					if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0' && isNaN(parseInt(inputDisplay.innerHTML)) == false){
 						inputDisplay.append(inputValue);
 					} else {
 						clearDisplayBoolean = false;
@@ -365,7 +365,6 @@
 			if(!firstValue && clearDisplayBoolean == true){
 				firstValue = finalResult;
 			}
-		
 			if(firstValue) { // This determines that it's a valid calculation
 				if(!secondValue){
 				 secondValue = inputDisplay.innerHTML;
@@ -384,31 +383,31 @@
 
 		function operatorSignSwitch(){ // Compute the numbers
 			switch (operatorSign){
+				case '/':
+				equalsValue = ((firstValue * 10) / (secondValue * 10));
+				validateMyReturn();
+				break;
 
-						case '/':
-						equalsValue = ((firstValue * 10) / (secondValue * 10));
-						validateMyReturn();
-						break;
+				case 'x':
+				equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
+				validateMyReturn();
+				break;
 
-						case 'x':
-						equalsValue = ((firstValue * 10) * (secondValue * 10)) / 100;
-						validateMyReturn();
-						break;
+				case '-':
+				equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
+				validateMyReturn();
+				break;
 
-						case '-':
-						equalsValue = ((firstValue * 10) - (secondValue * 10)) / 10;
-						validateMyReturn();
-						break;
-
-						case '+':
-						equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
-						validateMyReturn();
-					}
+				case '+':
+				equalsValue = ((firstValue * 10) + (secondValue * 10)) / 10;
+				validateMyReturn();
+			}
 		}
 		// Function that checks the returned value and manupilates it to render an easily understandable display.
 		function validateMyReturn() {
 			finalResult = equalsValue.toString();
 			console.log('Final Result length: ' +finalResult.length);
+
 			if(finalResult.indexOf('e') != -1 && finalResult.length > 16) {
 				if(finalResult.indexOf('-') != -1){
 					let lastTwo = Number(finalResult.substr(finalResult.length - 2));
@@ -416,8 +415,7 @@
 						inputDisplay.innerHTML = Math.round(Number(finalResult.slice(0, 4)))+ 'e' + lastTwo.toString();
 					} else {
 						inputDisplay.innerHTML = Math.round(Number(finalResult.slice(0, 4)))+ 'e-' + lastTwo;
-					}
-					
+					}	
 				} else {
 					let eIndex = finalResult.indexOf('e');
 					inputDisplay.innerHTML = finalResult.slice(0, 4)+ 'e' + finalResult[eIndex + 2] + finalResult[eIndex + 3];
@@ -440,6 +438,7 @@
 			if(finalResult.indexOf('e') === -1 && finalResult.length <= 16){
 				inputDisplay.innerHTML = finalResult.slice(0, 16);
 			}
+
 			if(finalResult == 'NaN'){ // If the final result is Not a Number...
 				inputDisplay.innerHTML = '0';
 			}
