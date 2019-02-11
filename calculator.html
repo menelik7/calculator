@@ -171,7 +171,7 @@
 				event.preventDefault();
 				let inputValue = numbersKey[i].innerHTML;
 				if(inputDisplayStringLength < 16){
-					if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0' && isNaN(parseInt(inputDisplay.innerHTML)) == false){
+					if(clearDisplayBoolean == false && inputDisplay.innerHTML != '0' && isNaN(parseInt(inputDisplay.innerHTML)) == false){ // Make sure we are at the beginning of our calculation
 						inputDisplay.append(inputValue);
 					} else {
 						clearDisplayBoolean = false;
@@ -338,6 +338,7 @@
 					operatorSignSwitch();
 					operatorSign = this.innerHTML;
 					firstValue = finalResult;
+					secondValue = '';
 					console.log('clearDisplayBoolean: ' +clearDisplayBoolean);
 					console.log('First value: ' +firstValue);
 				console.log('Operator sign: ' +operatorSign);
