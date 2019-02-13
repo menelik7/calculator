@@ -10,7 +10,6 @@
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 
     <!-- Bootstrap JS Files -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -20,6 +19,10 @@
     		text-align: center;
     		margin-top: 20px;
     	}
+
+    	h3 {
+    		margin-left: 10px;
+    	}
     </style>
 
 </head>
@@ -27,10 +30,14 @@
 <body>
 
 	<h1>Algorithm Two</h1>
+	<hr>
+	<h3>Styled with "js"</h3>
+	<div class="col-12" id="result"><span id="number"></span></div>
+	<br>
+	<h3>Styled with jQuery</h3>
 	<div class="col-12" id="display"></div>
 
 	<script>
-		let display = document.getElementById('display');
 		function getDigit(num){
 			let count = 0;
 			let currentNumber = num;
@@ -56,10 +63,15 @@
 			});
 		}
 
-		display.append('This is the reduced version of 5: ' + getDigit(5));
-		display.append('This is the reduced version of 10: ' + getDigit(10));
-		display.append('This is the reduced version of 10: ' + getDigit(99));
-		display.append('This is the reduced version of 99: ' + getDigit(9991));
+		let result = document.getElementById('result');
+		let number = document.getElementById('number');
+		result.prepend('5 in its reduced format is: ');
+		number.append(getDigit(5));
+		number.setAttribute('style', 'color: red; font-weight: bold; margin-left: 10px;')
+
+		$('#display').append(' 10 in its reduced format is: <strong><span style="color:#2F6FB9; margin-left: 10px">' + getDigit(10) + '</span></strong><br>');
+		$('#display').append(' 99 in its reduced format is: <strong><span style="color:#2F6FB9; margin-left: 10px">' + getDigit(99) + '</span></strong><br>');
+		$('#display').append(' 9991 in its reduced format is: <strong><span style="color:#2F6FB9; margin-left: 10px">' + getDigit(9991) + '</span></strong><br>');
 
 	</script>
 

@@ -20,6 +20,10 @@
     		text-align: center;
     		margin-top: 20px;
     	}
+    	h3 {
+    		text-align: center;
+    		margin-top: 20px;
+    	}
     </style>
 
 </head>
@@ -28,16 +32,34 @@
 	<h1>Algorithm Two</h1>
 	<div class="container">
 		<div class="row">
-			<div class="col-12" id="display"></div>
+			<h3>The quick way to do this with js6</h3>
+			<div class="col-12" id="display" style="overflow-wrap: break-word;"></div>
+
+			<h3>The UI way to do this <span style="color: red; font-size: .6em;">(a lil jQuery in there)</span></h3>
+			<div class="col-12" id="result"></div>
 		</div>
 	</div>
 	<script>
 		let display = document.getElementById('display');
+		let result = document.getElementById('result');
 
 		function getInput(){
-			for(let i = 0; i < 100;)display.append((++i % 3 ? '' : 'fizz') + (i % 5 ? '' : 'buzz') || ' ' +i+ ' ')
+			for(let i = 0; i < 100;)display.append((++i % 3 ? '' : 'fizz') + (i % 5 ? '' : 'buzz') || i)
 		}
+		
+		function getInputTheUIWay(){
+			for(let i = 1; i < 100; i++){
+				if(i % 3 == '0' && i % 5 != '0'){$(result).append('<span style="color: #03bf23;"> fizz </span>');}
+				if(i % 5 == '0' && i % 3 != '0'){$(result).append('<span style="color: blue;"> buzz </span>');}
+				if(i % 3 == '0' && i % 5 == '0'){
+					$(result).append('<strong><span style="color: red;"> FizzBuzz </span><strong>');
+				}
+				if(i % 3 != '0' && i % 5 != '0'){result.append(' ' +i+ ' ')}
+			}
+		}
+
 		getInput();
+		getInputTheUIWay();
 	</script>
 
 </body>
