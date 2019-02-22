@@ -1,3 +1,20 @@
+// Iterative solution
+// function fib(n) {
+// 	const array = [0, 1];
+
+// 	for (let i = 2; i <= n; i++) {
+// 		let x = array[i - 1];
+// 		let y = array[i - 2];
+
+// 		array.push(x + y);
+// 	}
+
+// 	console.log(JSON.stringify(array, null, 1));
+// 	return 'Fibonacci ' + n + ' is ' + array[n];
+// }
+
+
+// Recursive solution
 function memoize(fn) {
 	const cache = {};
 	return function(...args) {
